@@ -208,33 +208,32 @@ export default function App() {
     const recipe = step === 5 ? generateRecipe() : null;
 
     return (
-        <div className="min-h-screen bg-[#F6E7A6] text-obabaz-earth-900 p-4 font-sans">
-            <header className="max-w-2xl mx-auto py-8 text-center relative z-[50]">
-                <motion.h1
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-4xl font-bold text-obabaz-warm-600 flex items-center justify-center gap-2"
-                >
-                    <Utensils className="w-8 h-8" /> obabaz 献立帖
-                </motion.h1>
-                <p className="mt-2 text-obabaz-earth-500 italic">〜 旬を愛で、手間を慈しむ台所から 〜</p>
-            </header>
+        <div className="min-h-screen bg-[#F6E7A6] text-obabaz-earth-900 font-sans overflow-x-hidden">
+            {/* Header and Step Indicator - Semi-Sticky Container */}
+            <div className="sticky top-0 z-[100] bg-[#F6E7A6]/80 backdrop-blur-md px-4 pt-4">
+                <header className="max-w-2xl mx-auto py-4 text-center relative">
+                    <motion.h1
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-3xl md:text-4xl font-bold text-obabaz-warm-600 flex items-center justify-center gap-2 px-12"
+                    >
+                        <Utensils className="w-6 h-6 md:w-8 md:h-8" /> <span className="truncate">obabaz 献立帖</span>
+                    </motion.h1>
+                    <p className="mt-1 text-obabaz-earth-500 italic text-xs md:text-base">〜 旬を愛で、手間を慈しむ台所から 〜</p>
 
-            <button
-                onClick={() => setIsMenuOpen(true)}
-                className="fixed rounded-full hover:bg-white/50 transition-all active:scale-90 z-[999]"
-                style={{ top: '1.5rem', right: '1.5rem', left: 'auto', padding: '1rem' }}
-                aria-label="メニューを開く"
-            >
-                <Menu className="w-10 h-10 text-obabaz-warm-600" />
-            </button>
+                    <button
+                        onClick={() => setIsMenuOpen(true)}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 p-2 transition-all active:scale-90"
+                        aria-label="メニューを開く"
+                    >
+                        <Menu className="w-8 h-8 text-obabaz-warm-600" />
+                    </button>
+                </header>
 
-
-            <main className="max-w-2xl mx-auto">
                 {/* Step Indicator */}
-                <div className="flex justify-between mb-8 overflow-x-auto pb-4 px-2">
+                <div className="max-w-2xl mx-auto flex justify-between mb-4 overflow-x-auto pb-2 px-2 custom-scrollbar-hide">
                     {STEPS.map((s, idx) => (
-                        <div key={s.id} className="flex flex-col items-center min-w-[60px] md:min-w-[70px]">
+                        <div key={s.id} className="flex flex-col items-center min-w-[55px] md:min-w-[70px]">
                             <div className={cn(
                                 "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mb-1 transition-all shadow-sm",
                                 idx <= step ? "bg-obabaz-warm-500 text-white" : "bg-white border border-obabaz-earth-200 text-obabaz-earth-300"
@@ -250,6 +249,9 @@ export default function App() {
                         </div>
                     ))}
                 </div>
+            </div>
+
+            <main className="max-w-2xl mx-auto p-4">
 
                 <div className="glass-panel p-6 md:p-10 rounded-[2.5rem] min-h-[450px] flex flex-col relative overflow-hidden">
                     {/* Subtle background decoration */}
@@ -281,7 +283,7 @@ export default function App() {
                                                     key={m}
                                                     onClick={() => setFormData(prev => ({ ...prev, main: m }))}
                                                     className={cn(
-                                                        "px-5 py-2.5 rounded-full border-2 transition-all font-bold",
+                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
                                                         formData.main === m
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
                                                             : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -311,7 +313,7 @@ export default function App() {
                                                     key={v}
                                                     onClick={() => toggleVegetable(v)}
                                                     className={cn(
-                                                        "px-4 py-2 rounded-full border-2 transition-all font-bold text-sm",
+                                                        "px-4 py-3 rounded-full border-2 transition-all font-bold text-sm min-h-[44px]",
                                                         formData.vegetables.includes(v)
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
                                                             : "bg-white border-obabaz-earth-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -344,7 +346,7 @@ export default function App() {
                                                 key={s}
                                                 onClick={() => setFormData(prev => ({ ...prev, staple: s }))}
                                                 className={cn(
-                                                    "px-6 py-3 rounded-2xl border-2 transition-all font-bold",
+                                                    "px-6 py-3 rounded-2xl border-2 transition-all font-bold min-h-[44px]",
                                                     formData.staple === s
                                                         ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
                                                         : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -363,7 +365,7 @@ export default function App() {
                                                         key={t}
                                                         onClick={() => setFormData(prev => ({ ...prev, stapleTemp: t }))}
                                                         className={cn(
-                                                            "px-6 py-2.5 rounded-full border-2 transition-all font-bold",
+                                                            "px-6 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
                                                             formData.stapleTemp === t
                                                                 ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
                                                                 : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -431,10 +433,10 @@ export default function App() {
                                                     key={u}
                                                     onClick={() => setFormData(prev => ({ ...prev, umami: u }))}
                                                     className={cn(
-                                                        "px-5 py-2.5 rounded-full border-2 transition-all font-bold",
+                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
                                                         formData.umami === u
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
-                                                            : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
+                                                            : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
                                                     )}
                                                 >
                                                     {u}
@@ -461,10 +463,10 @@ export default function App() {
                                                     key={s}
                                                     onClick={() => setFormData(prev => ({ ...prev, salt: s }))}
                                                     className={cn(
-                                                        "px-5 py-2.5 rounded-full border-2 transition-all font-bold",
+                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
                                                         formData.salt === s
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
-                                                            : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
+                                                            : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
                                                     )}
                                                 >
                                                     {s}
@@ -564,7 +566,7 @@ export default function App() {
                                                             key={opt}
                                                             onClick={() => selectArrangementOption(activeArrangementCategory, opt)}
                                                             className={cn(
-                                                                "px-5 py-2.5 rounded-full border-2 text-sm font-bold transition-all",
+                                                                "px-5 py-3 rounded-full border-2 text-sm font-bold transition-all min-h-[44px]",
                                                                 formData.arrangements[activeArrangementCategory] === opt
                                                                     ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
                                                                     : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -603,21 +605,21 @@ export default function App() {
 
                             {step === 5 && recipe && (
                                 <div className="space-y-6">
-                                    <div className="bg-white/90 border-[6px] border-[#A8C3A1] shadow-2xl relative overflow-hidden flex flex-col h-auto max-h-[80vh]">
-                                        <div className="custom-scrollbar scroll-smooth flex-grow" style={{ padding: '32px 48px', paddingBottom: '200px', overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
-                                            <h3 className="text-3xl font-black text-obabaz-warm-800 mb-8 flex items-center gap-3">
+                                    <div className="bg-white/95 border-[6px] border-[#A8C3A1] shadow-2xl relative overflow-hidden flex flex-col h-auto">
+                                        <div style={{ padding: '24px', paddingBottom: '120px' }}>
+                                            <h3 className="text-2xl md:text-3xl font-black text-obabaz-warm-800 mb-6 flex items-center gap-3">
                                                 {recipe.title}
                                             </h3>
-                                            <p style={{ color: '#4A3B31', fontStyle: 'italic', marginBottom: '48px', paddingLeft: '24px', lineHeight: '1.6', fontSize: '1.125rem' }}>
+                                            <p style={{ color: '#4A3B31', fontStyle: 'italic', marginBottom: '32px', paddingLeft: '12px', lineHeight: '1.6', fontSize: '1rem' }}>
                                                 {recipe.description}
                                             </p>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                                                 {recipe.steps.map((s, i) => (
-                                                    <div key={i} style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                                                        <div style={{ backgroundColor: '#AFC8E8', color: 'white', width: '32px', height: '32px', borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '900', flexShrink: 0, marginTop: '4px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
+                                                    <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                                                        <div style={{ backgroundColor: '#AFC8E8', color: 'white', width: '28px', height: '28px', borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '900', flexShrink: 0, marginTop: '4px' }}>
                                                             {i + 1}
                                                         </div>
-                                                        <div style={{ color: '#2D241E', lineHeight: '1.6', fontWeight: '700', fontSize: '1.25rem', flexGrow: 1, paddingTop: '2px' }}>
+                                                        <div style={{ color: '#2D241E', lineHeight: '1.6', fontWeight: '700', fontSize: '1.125rem', flexGrow: 1, paddingTop: '2px' }}>
                                                             {s}
                                                         </div>
                                                     </div>
@@ -625,12 +627,12 @@ export default function App() {
                                             </div>
                                         </div>
 
-                                        <div style={{ position: 'absolute', bottom: '24px', right: '24px', zIndex: 100 }}>
+                                        <div style={{ position: 'absolute', bottom: '24px', left: '0', right: '0', display: 'flex', justifyContent: 'center', zIndex: 100 }}>
                                             <button
                                                 onClick={reset}
-                                                className="bg-obabaz-earth-800 hover:bg-obabaz-earth-900 text-white px-10 py-4 rounded-full font-black shadow-2xl flex items-center gap-3 transition-all hover:scale-105 active:scale-95 whitespace-nowrap text-lg"
+                                                className="bg-obabaz-earth-800 hover:bg-obabaz-earth-900 text-white px-8 py-4 rounded-full font-black shadow-2xl flex items-center gap-2 transition-all hover:scale-105 active:scale-95 whitespace-nowrap text-base"
                                             >
-                                                <RotateCcw className="w-6 h-6" /> もう一度考える
+                                                <RotateCcw className="w-5 h-5" /> もう一度考える
                                             </button>
                                         </div>
 
