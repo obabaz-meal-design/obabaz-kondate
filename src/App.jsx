@@ -211,19 +211,22 @@ export default function App() {
         <div className="min-h-screen bg-[#F6E7A6] text-obabaz-earth-900 font-sans overflow-x-hidden">
             {/* Header and Step Indicator - Semi-Sticky Container */}
             <div className="sticky top-0 z-[100] bg-[#F6E7A6]/80 backdrop-blur-md px-4 pt-4">
-                <header className="max-w-2xl mx-auto py-4 text-center relative">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-3xl md:text-4xl font-bold text-obabaz-warm-600 flex items-center justify-center gap-2 px-12"
+                <header className="max-w-2xl mx-auto py-4 flex items-center justify-between relative">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex items-center gap-2 overflow-hidden"
                     >
-                        <Utensils className="w-6 h-6 md:w-8 md:h-8" /> <span className="truncate">obabaz 献立帖</span>
-                    </motion.h1>
-                    <p className="mt-1 text-obabaz-earth-500 italic text-xs md:text-base">〜 旬を愛で、手間を慈しむ台所から 〜</p>
+                        <Utensils className="w-6 h-6 md:w-8 md:h-8 text-obabaz-warm-600 flex-shrink-0" />
+                        <div className="flex flex-col items-start overflow-hidden">
+                            <h1 className="text-xl md:text-3xl font-bold text-obabaz-warm-600 truncate leading-tight">obabaz 献立帖</h1>
+                            <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate">〜 旬を愛で、手間を慈しむ台所から 〜</p>
+                        </div>
+                    </motion.div>
 
                     <button
                         onClick={() => setIsMenuOpen(true)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 p-2 transition-all active:scale-90"
+                        className="p-2 transition-all active:scale-90 flex-shrink-0"
                         aria-label="メニューを開く"
                     >
                         <Menu className="w-8 h-8 text-obabaz-warm-600" />
@@ -277,15 +280,15 @@ export default function App() {
                                 <div className="space-y-8">
                                     <div>
                                         <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">メインの主役さん</label>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="grid grid-cols-1 gap-3">
                                             {INGREDIENT_CATEGORIES.main.map(m => (
                                                 <button
                                                     key={m}
                                                     onClick={() => setFormData(prev => ({ ...prev, main: m }))}
                                                     className={cn(
-                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
+                                                        "px-5 py-4 rounded-2xl border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
                                                         formData.main === m
-                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
+                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
                                                     )}
                                                 >
@@ -294,28 +297,34 @@ export default function App() {
                                             ))}
                                         </div>
                                         {formData.main === 'その他' && (
-                                            <motion.input
+                                            <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: 'auto' }}
-                                                type="text"
-                                                placeholder="どんな食材ですか？"
-                                                className="mt-3 w-full p-3 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                                value={formData.mainOther}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, mainOther: e.target.value }))}
-                                            />
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なメイン食材を入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    placeholder="例：鶏もも肉、鮭の切り身など"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    value={formData.mainOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, mainOther: e.target.value }))}
+                                                />
+                                            </motion.div>
                                         )}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">脇を固めるお野菜（3つまで）</label>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="grid grid-cols-1 gap-3">
                                             {INGREDIENT_CATEGORIES.vegetables.map(v => (
                                                 <button
                                                     key={v}
                                                     onClick={() => toggleVegetable(v)}
                                                     className={cn(
-                                                        "px-4 py-3 rounded-full border-2 transition-all font-bold text-sm min-h-[44px]",
+                                                        "px-4 py-4 rounded-2xl border-2 transition-all font-bold text-lg min-h-[48px] w-full flex items-center justify-center",
                                                         formData.vegetables.includes(v)
-                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
+                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                             : "bg-white border-obabaz-earth-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
                                                     )}
                                                 >
@@ -324,15 +333,21 @@ export default function App() {
                                             ))}
                                         </div>
                                         {formData.vegetables.includes('その他') && (
-                                            <motion.input
+                                            <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: 'auto' }}
-                                                type="text"
-                                                placeholder="どんなお野菜を入れましょう？"
-                                                className="mt-3 w-full p-3 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                                value={formData.vegetablesOther}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, vegetablesOther: e.target.value }))}
-                                            />
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なお野菜を入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    placeholder="例：キャベツ、ほうれん草など"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    value={formData.vegetablesOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, vegetablesOther: e.target.value }))}
+                                                />
+                                            </motion.div>
                                         )}
                                     </div>
                                 </div>
@@ -340,15 +355,15 @@ export default function App() {
 
                             {step === 1 && (
                                 <div className="space-y-6">
-                                    <div className="flex flex-wrap gap-3">
+                                    <div className="grid grid-cols-1 gap-3">
                                         {INGREDIENT_CATEGORIES.staple.map(s => (
                                             <button
                                                 key={s}
                                                 onClick={() => setFormData(prev => ({ ...prev, staple: s }))}
                                                 className={cn(
-                                                    "px-6 py-3 rounded-2xl border-2 transition-all font-bold min-h-[44px]",
+                                                    "px-6 py-4 rounded-2xl border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
                                                     formData.staple === s
-                                                        ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
+                                                        ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                         : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
                                                 )}
                                             >
@@ -359,15 +374,15 @@ export default function App() {
                                     {formData.staple && (
                                         <div className="pt-4 border-t border-obabaz-earth-100">
                                             <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">仕立て（温度）</label>
-                                            <div className="flex gap-3">
+                                            <div className="grid grid-cols-2 gap-3">
                                                 {INGREDIENT_CATEGORIES.temp.map(t => (
                                                     <button
                                                         key={t}
                                                         onClick={() => setFormData(prev => ({ ...prev, stapleTemp: t }))}
                                                         className={cn(
-                                                            "px-6 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
+                                                            "px-6 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
                                                             formData.stapleTemp === t
-                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-105"
+                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                                 : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
                                                         )}
                                                     >
@@ -378,15 +393,21 @@ export default function App() {
                                         </div>
                                     )}
                                     {formData.staple === 'その他' && (
-                                        <motion.input
+                                        <motion.div
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
-                                            type="text"
-                                            placeholder="何を合わせますか？"
-                                            className="w-full p-3 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                            value={formData.stapleOther}
-                                            onChange={(e) => setFormData(prev => ({ ...prev, stapleOther: e.target.value }))}
-                                        />
+                                            className="my-10"
+                                        >
+                                            <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">合わせたい食材の種類を入力してください</label>
+                                            <input
+                                                autoFocus
+                                                type="text"
+                                                placeholder="例：ナン、そばなど"
+                                                className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                value={formData.stapleOther}
+                                                onChange={(e) => setFormData(prev => ({ ...prev, stapleOther: e.target.value }))}
+                                            />
+                                        </motion.div>
                                     )}
                                 </div>
                             )}
@@ -398,9 +419,9 @@ export default function App() {
                                             key={m}
                                             onClick={() => setFormData(prev => ({ ...prev, method: m }))}
                                             className={cn(
-                                                "p-6 rounded-3xl border-2 text-center transition-all font-bold shadow-sm",
+                                                "p-6 rounded-3xl border-2 text-center transition-all font-bold shadow-sm min-h-[48px] text-lg w-full flex items-center justify-center",
                                                 formData.method === m
-                                                    ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-lg transform scale-105"
+                                                    ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-lg transform scale-[1.02]"
                                                     : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
                                             )}
                                         >
@@ -409,15 +430,21 @@ export default function App() {
                                     ))}
                                     {formData.method === 'その他' && (
                                         <div className="col-span-2 md:col-span-3">
-                                            <motion.input
+                                            <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: 'auto' }}
-                                                type="text"
-                                                placeholder="どんな方法で調理しますか？"
-                                                className="w-full p-4 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                                value={formData.methodOther}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, methodOther: e.target.value }))}
-                                            />
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的な調理方法を入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    placeholder="例：低温調理、圧力鍋など"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    value={formData.methodOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, methodOther: e.target.value }))}
+                                                />
+                                            </motion.div>
                                         </div>
                                     )}
                                 </div>
@@ -427,15 +454,15 @@ export default function App() {
                                 <div className="space-y-8">
                                     <div>
                                         <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">深い「うまみ」のベース</label>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="grid grid-cols-1 gap-3">
                                             {SEASONINGS.umami.map(u => (
                                                 <button
                                                     key={u}
                                                     onClick={() => setFormData(prev => ({ ...prev, umami: u }))}
                                                     className={cn(
-                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
+                                                        "px-5 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
                                                         formData.umami === u
-                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
+                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
                                                     )}
                                                 >
@@ -444,28 +471,34 @@ export default function App() {
                                             ))}
                                         </div>
                                         {formData.umami === 'その他' && (
-                                            <motion.input
+                                            <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: 'auto' }}
-                                                type="text"
-                                                placeholder="どんな「うまみ」を足しますか？"
-                                                className="mt-3 w-full p-3 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                                value={formData.umamiOther}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, umamiOther: e.target.value }))}
-                                            />
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なうまみベースを入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    placeholder="例：コンソメ、オイスターソースなど"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    value={formData.umamiOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, umamiOther: e.target.value }))}
+                                                />
+                                            </motion.div>
                                         )}
                                     </div>
                                     <div>
                                         <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">さらに引き立つ「味付け」</label>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="grid grid-cols-1 gap-3">
                                             {SEASONINGS.salt.map(s => (
                                                 <button
                                                     key={s}
                                                     onClick={() => setFormData(prev => ({ ...prev, salt: s }))}
                                                     className={cn(
-                                                        "px-5 py-3 rounded-full border-2 transition-all font-bold min-h-[44px]",
+                                                        "px-5 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
                                                         formData.salt === s
-                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-105"
+                                                            ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
                                                     )}
                                                 >
@@ -474,15 +507,21 @@ export default function App() {
                                             ))}
                                         </div>
                                         {formData.salt === 'その他' && (
-                                            <motion.input
+                                            <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: 'auto' }}
-                                                type="text"
-                                                placeholder="どんな「味付け」にしますか？"
-                                                className="mt-3 w-full p-3 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
-                                                value={formData.saltOther}
-                                                onChange={(e) => setFormData(prev => ({ ...prev, saltOther: e.target.value }))}
-                                            />
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的な味付けを入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    placeholder="例：ケチャップ、バルサミコ酢など"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    value={formData.saltOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, saltOther: e.target.value }))}
+                                                />
+                                            </motion.div>
                                         )}
                                     </div>
                                 </div>
@@ -560,13 +599,13 @@ export default function App() {
                                                         ✕
                                                     </button>
                                                 </div>
-                                                <div className="flex flex-wrap gap-2 overflow-y-auto pr-2 custom-scrollbar">
+                                                <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-2 custom-scrollbar">
                                                     {ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.options.map(opt => (
                                                         <button
                                                             key={opt}
                                                             onClick={() => selectArrangementOption(activeArrangementCategory, opt)}
                                                             className={cn(
-                                                                "px-5 py-3 rounded-full border-2 text-sm font-bold transition-all min-h-[44px]",
+                                                                "px-5 py-4 rounded-full border-2 text-lg font-bold transition-all min-h-[48px] w-full flex items-center justify-center",
                                                                 formData.arrangements[activeArrangementCategory] === opt
                                                                     ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
                                                                     : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -580,12 +619,14 @@ export default function App() {
                                                     <motion.div
                                                         initial={{ opacity: 0, height: 0 }}
                                                         animate={{ opacity: 1, height: 'auto' }}
-                                                        className="mt-6"
+                                                        className="mt-8 mb-4 px-2"
                                                     >
+                                                        <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なアレンジを入力してください</label>
                                                         <input
+                                                            autoFocus
                                                             type="text"
-                                                            placeholder="どんなアレンジにしますか？"
-                                                            className="w-full p-4 rounded-xl border-2 border-obabaz-warm-200 focus:border-obabaz-warm-500 outline-none transition-all text-sm bg-white/50"
+                                                            placeholder="例：フライドオニオン、柚子胡椒など"
+                                                            className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                             value={formData.arrangementsOther[activeArrangementCategory] || ''}
                                                             onChange={(e) => setFormData(prev => ({
                                                                 ...prev,
