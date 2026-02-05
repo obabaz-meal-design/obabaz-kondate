@@ -215,18 +215,18 @@ export default function App() {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-2 overflow-hidden"
+                        className="flex flex-col items-start overflow-hidden"
                     >
-                        <Utensils className="w-6 h-6 md:w-8 md:h-8 text-obabaz-warm-600 flex-shrink-0" />
-                        <div className="flex flex-col items-start overflow-hidden">
-                            <h1 className="text-xl md:text-3xl font-bold text-obabaz-warm-600 truncate leading-tight">obabaz 献立帖</h1>
-                            <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate">〜 旬を愛で、手間を慈しむ台所から 〜</p>
+                        <div className="flex items-center gap-2">
+                            <Utensils className="w-6 h-6 md:w-8 md:h-8 text-obabaz-warm-600 flex-shrink-0" />
+                            <h1 className="text-xl md:text-3xl font-bold text-obabaz-warm-600 truncate leading-none">obabaz 献立帖</h1>
                         </div>
+                        <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate ml-8 md:ml-10 mt-1">〜 旬を愛で、手間を慈しむ台所から 〜</p>
                     </motion.div>
 
                     <button
                         onClick={() => setIsMenuOpen(true)}
-                        className="p-2 transition-all active:scale-90 flex-shrink-0"
+                        className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
                         aria-label="メニューを開く"
                     >
                         <Menu className="w-8 h-8 text-obabaz-warm-600" />
@@ -286,7 +286,7 @@ export default function App() {
                                                     key={m}
                                                     onClick={() => setFormData(prev => ({ ...prev, main: m }))}
                                                     className={cn(
-                                                        "px-5 py-4 rounded-2xl border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                        "px-5 rounded-2xl border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                         formData.main === m
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -322,7 +322,7 @@ export default function App() {
                                                     key={v}
                                                     onClick={() => toggleVegetable(v)}
                                                     className={cn(
-                                                        "px-4 py-4 rounded-2xl border-2 transition-all font-bold text-lg min-h-[48px] w-full flex items-center justify-center",
+                                                        "px-4 rounded-2xl border-2 transition-all font-bold text-lg h-[48px] min-h-[48px] w-full flex items-center justify-center flex-shrink-0",
                                                         formData.vegetables.includes(v)
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                             : "bg-white border-obabaz-earth-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -361,7 +361,7 @@ export default function App() {
                                                 key={s}
                                                 onClick={() => setFormData(prev => ({ ...prev, staple: s }))}
                                                 className={cn(
-                                                    "px-6 py-4 rounded-2xl border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                    "px-6 rounded-2xl border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                     formData.staple === s
                                                         ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                         : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -380,7 +380,7 @@ export default function App() {
                                                         key={t}
                                                         onClick={() => setFormData(prev => ({ ...prev, stapleTemp: t }))}
                                                         className={cn(
-                                                            "px-6 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                            "px-6 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                             formData.stapleTemp === t
                                                                 ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
                                                                 : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -419,7 +419,7 @@ export default function App() {
                                             key={m}
                                             onClick={() => setFormData(prev => ({ ...prev, method: m }))}
                                             className={cn(
-                                                "p-6 rounded-3xl border-2 text-center transition-all font-bold shadow-sm min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                "rounded-3xl border-2 text-center transition-all font-bold shadow-sm h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                 formData.method === m
                                                     ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-lg transform scale-[1.02]"
                                                     : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
@@ -460,7 +460,7 @@ export default function App() {
                                                     key={u}
                                                     onClick={() => setFormData(prev => ({ ...prev, umami: u }))}
                                                     className={cn(
-                                                        "px-5 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                        "px-5 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                         formData.umami === u
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -496,7 +496,7 @@ export default function App() {
                                                     key={s}
                                                     onClick={() => setFormData(prev => ({ ...prev, salt: s }))}
                                                     className={cn(
-                                                        "px-5 py-4 rounded-full border-2 transition-all font-bold min-h-[48px] text-lg w-full flex items-center justify-center",
+                                                        "px-5 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
                                                         formData.salt === s
                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
                                                             : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
@@ -599,45 +599,48 @@ export default function App() {
                                                         ✕
                                                     </button>
                                                 </div>
-                                                <div className="grid grid-cols-1 gap-3 overflow-y-auto pr-2 custom-scrollbar">
-                                                    {ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.options.map(opt => (
-                                                        <button
-                                                            key={opt}
-                                                            onClick={() => selectArrangementOption(activeArrangementCategory, opt)}
-                                                            className={cn(
-                                                                "px-5 py-4 rounded-full border-2 text-lg font-bold transition-all min-h-[48px] w-full flex items-center justify-center",
-                                                                formData.arrangements[activeArrangementCategory] === opt
-                                                                    ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
-                                                                    : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
-                                                            )}
+                                                <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar min-h-0" style={{ maxHeight: '70vh' }}>
+                                                    <div className="flex flex-col gap-2 mb-4">
+                                                        {ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.options.map(opt => (
+                                                            <button
+                                                                key={opt}
+                                                                onClick={() => selectArrangementOption(activeArrangementCategory, opt)}
+                                                                style={{ minHeight: '48px', height: '48px', flexShrink: 0 }}
+                                                                className={cn(
+                                                                    "px-5 rounded-full border-2 text-lg font-bold transition-all w-full flex items-center justify-center",
+                                                                    formData.arrangements[activeArrangementCategory] === opt
+                                                                        ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
+                                                                        : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
+                                                                )}
+                                                            >
+                                                                {opt}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                    {formData.arrangements[activeArrangementCategory] === 'その他' && (
+                                                        <motion.div
+                                                            initial={{ opacity: 0, height: 0 }}
+                                                            animate={{ opacity: 1, height: 'auto' }}
+                                                            className="mb-4 px-2"
                                                         >
-                                                            {opt}
-                                                        </button>
-                                                    ))}
+                                                            <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なアレンジを入力してください</label>
+                                                            <input
+                                                                autoFocus
+                                                                type="text"
+                                                                placeholder="例：フライドオニオン、柚子胡椒など"
+                                                                className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                                value={formData.arrangementsOther[activeArrangementCategory] || ''}
+                                                                onChange={(e) => setFormData(prev => ({
+                                                                    ...prev,
+                                                                    arrangementsOther: {
+                                                                        ...prev.arrangementsOther,
+                                                                        [activeArrangementCategory]: e.target.value
+                                                                    }
+                                                                }))}
+                                                            />
+                                                        </motion.div>
+                                                    )}
                                                 </div>
-                                                {formData.arrangements[activeArrangementCategory] === 'その他' && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, height: 0 }}
-                                                        animate={{ opacity: 1, height: 'auto' }}
-                                                        className="mt-8 mb-4 px-2"
-                                                    >
-                                                        <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なアレンジを入力してください</label>
-                                                        <input
-                                                            autoFocus
-                                                            type="text"
-                                                            placeholder="例：フライドオニオン、柚子胡椒など"
-                                                            className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
-                                                            value={formData.arrangementsOther[activeArrangementCategory] || ''}
-                                                            onChange={(e) => setFormData(prev => ({
-                                                                ...prev,
-                                                                arrangementsOther: {
-                                                                    ...prev.arrangementsOther,
-                                                                    [activeArrangementCategory]: e.target.value
-                                                                }
-                                                            }))}
-                                                        />
-                                                    </motion.div>
-                                                )}
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
