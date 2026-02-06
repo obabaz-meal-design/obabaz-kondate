@@ -786,17 +786,18 @@ export default function App() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="absolute top-0 right-0 h-full w-80 shadow-2xl p-8 flex flex-col border-l border-obabaz-warm-300 solid-bg"
+                            className="absolute top-0 right-0 h-full w-80 shadow-2xl p-10 flex flex-col border-l border-obabaz-warm-300 bg-[#AFC8E8]/90 backdrop-blur-xl"
                         >
                             <div className="flex justify-end mb-8">
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="p-2 rounded-full hover:bg-white/50 transition-all"
+                                    className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
+                                    aria-label="メニューを閉じる"
                                 >
-                                    <X className="w-6 h-6 text-obabaz-earth-600" />
+                                    <X className="w-8 h-8 text-obabaz-warm-600" />
                                 </button>
                             </div>
-                            <nav className="space-y-6">
+                            <nav className="space-y-8">
                                 <button
                                     onClick={() => { setShowModal('about'); setIsMenuOpen(false); }}
                                     className="w-full text-left font-bold text-obabaz-earth-700 hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
@@ -816,7 +817,7 @@ export default function App() {
                                     <Sparkles className="w-5 h-5" /> プライバシーポリシー
                                 </button>
                             </nav>
-                            <div className="mt-auto pt-8 border-t border-obabaz-earth-200 text-xs text-obabaz-earth-400 font-medium">
+                            <div className="mt-auto pt-8 pb-12 border-t border-obabaz-earth-200 text-xs text-obabaz-earth-400 font-medium">
                                 obabaz 献立帖 v1.0
                             </div>
                         </motion.div>
