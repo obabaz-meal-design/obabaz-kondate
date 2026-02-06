@@ -534,113 +534,114 @@ export default function App() {
                                 </div>
                             )}
 
-                            <div className="space-y-4 px-2">
-                                {ARRANGEMENTS.map(a => {
-                                    const isSelected = !!formData.arrangements[a.id];
-                                    const isActive = activeArrangementCategory === a.id;
-                                    const displayValue = formData.arrangements[a.id] === 'その他'
-                                        ? (formData.arrangementsOther[a.id] || 'その他')
-                                        : formData.arrangements[a.id];
+                            {step === 4 && (
+                                <div className="space-y-4 px-2">
+                                    {ARRANGEMENTS.map(a => {
+                                        const isSelected = !!formData.arrangements[a.id];
+                                        const isActive = activeArrangementCategory === a.id;
+                                        const displayValue = formData.arrangements[a.id] === 'その他'
+                                            ? (formData.arrangementsOther[a.id] || 'その他')
+                                            : formData.arrangements[a.id];
 
-                                    return (
-                                        <div key={a.id} className="overflow-hidden border-2 border-obabaz-warm-100 rounded-3xl bg-white shadow-sm transition-all duration-300">
-                                            <button
-                                                onClick={() => setActiveArrangementCategory(isActive ? null : a.id)}
-                                                className={cn(
-                                                    "w-full p-5 flex items-center justify-between transition-all",
-                                                    isActive ? "bg-obabaz-warm-50" : "bg-white"
-                                                )}
-                                            >
-                                                <div className="flex items-center gap-4 min-w-0">
-                                                    <span className="text-2xl flex-shrink-0">{a.icon}</span>
-                                                    <div className="text-left min-w-0">
-                                                        <h4 className="font-bold text-obabaz-earth-800 text-base">{a.label}</h4>
-                                                        {isSelected && !isActive && (
-                                                            <p className="text-xs text-obabaz-warm-600 font-bold truncate">
-                                                                選択中: {displayValue}
-                                                            </p>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <div className="flex items-center gap-3">
-                                                    {isSelected && (
-                                                        <div
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                removeArrangement(a.id);
-                                                            }}
-                                                            className="bg-obabaz-earth-100 text-obabaz-earth-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black hover:bg-obabaz-warm-200 transition-colors"
-                                                        >
-                                                            ✕
-                                                        </div>
+                                        return (
+                                            <div key={a.id} className="overflow-hidden border-2 border-obabaz-warm-100 rounded-3xl bg-white shadow-sm transition-all duration-300">
+                                                <button
+                                                    onClick={() => setActiveArrangementCategory(isActive ? null : a.id)}
+                                                    className={cn(
+                                                        "w-full p-5 flex items-center justify-between transition-all",
+                                                        isActive ? "bg-obabaz-warm-50" : "bg-white"
                                                     )}
-                                                    <div className={cn("transition-transform duration-300", isActive ? "rotate-180" : "")}>
-                                                        <ChevronLeft className="w-5 h-5 -rotate-90 text-obabaz-earth-300" />
-                                                    </div>
-                                                </div>
-                                            </button>
-
-                                            <AnimatePresence>
-                                                {isActive && (
-                                                    <motion.div
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: 'auto', opacity: 1 }}
-                                                        exit={{ height: 0, opacity: 0 }}
-                                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                                                    >
-                                                        <div className="p-4 pt-0 bg-obabaz-warm-50/30 border-t border-obabaz-warm-50">
-                                                            <div className="grid grid-cols-1 gap-2 py-4">
-                                                                {a.options.map(opt => (
-                                                                    <button
-                                                                        key={opt}
-                                                                        onClick={() => selectArrangementOption(a.id, opt)}
-                                                                        style={{ minHeight: '48px', height: '48px' }}
-                                                                        className={cn(
-                                                                            "px-6 rounded-2xl border-2 text-base font-bold transition-all w-full flex items-center justify-center",
-                                                                            formData.arrangements[a.id] === opt
-                                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
-                                                                                : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
-                                                                        )}
-                                                                    >
-                                                                        {opt}
-                                                                    </button>
-                                                                ))}
-                                                            </div>
-
-                                                            {formData.arrangements[a.id] === 'その他' && (
-                                                                <motion.div
-                                                                    initial={{ opacity: 0, y: -10 }}
-                                                                    animate={{ opacity: 1, y: 0 }}
-                                                                    className="pb-4"
-                                                                >
-                                                                    <label className="block text-[10px] font-black mb-2 text-obabaz-warm-400 uppercase tracking-widest pl-2">具体的な内容を教えてください</label>
-                                                                    <input
-                                                                        ref={otherInputRef}
-                                                                        type="text"
-                                                                        placeholder="例：フライドオニオン、柚子胡椒など"
-                                                                        className="w-full p-4 rounded-xl border-2 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-base bg-white shadow-sm relative z-10"
-                                                                        value={formData.arrangementsOther[a.id] || ''}
-                                                                        onChange={(e) => setFormData(prev => ({
-                                                                            ...prev,
-                                                                            arrangementsOther: {
-                                                                                ...prev.arrangementsOther,
-                                                                                [a.id]: e.target.value
-                                                                            }
-                                                                        }))}
-                                                                    />
-                                                                </motion.div>
+                                                >
+                                                    <div className="flex items-center gap-4 min-w-0">
+                                                        <span className="text-2xl flex-shrink-0">{a.icon}</span>
+                                                        <div className="text-left min-w-0">
+                                                            <h4 className="font-bold text-obabaz-earth-800 text-base">{a.label}</h4>
+                                                            {isSelected && !isActive && (
+                                                                <p className="text-xs text-obabaz-warm-600 font-bold truncate">
+                                                                    選択中: {displayValue}
+                                                                </p>
                                                             )}
                                                         </div>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </div>
-                                    );
-                                })}
+                                                    </div>
+                                                    <div className="flex items-center gap-3">
+                                                        {isSelected && (
+                                                            <div
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    removeArrangement(a.id);
+                                                                }}
+                                                                className="bg-obabaz-earth-100 text-obabaz-earth-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black hover:bg-obabaz-warm-200 transition-colors"
+                                                            >
+                                                                ✕
+                                                            </div>
+                                                        )}
+                                                        <div className={cn("transition-transform duration-300", isActive ? "rotate-180" : "")}>
+                                                            <ChevronLeft className="w-5 h-5 -rotate-90 text-obabaz-earth-300" />
+                                                        </div>
+                                                    </div>
+                                                </button>
 
-                                {/* 150px footer spacer to ensure bottom items are not hidden by fixed action buttons */}
-                                <div className="h-[150px] w-full" />
-                            </div>
+                                                <AnimatePresence>
+                                                    {isActive && (
+                                                        <motion.div
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: 'auto', opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                                        >
+                                                            <div className="p-4 pt-0 bg-obabaz-warm-50/30 border-t border-obabaz-warm-50">
+                                                                <div className="grid grid-cols-1 gap-2 py-4">
+                                                                    {a.options.map(opt => (
+                                                                        <button
+                                                                            key={opt}
+                                                                            onClick={() => selectArrangementOption(a.id, opt)}
+                                                                            style={{ minHeight: '48px', height: '48px' }}
+                                                                            className={cn(
+                                                                                "px-6 rounded-2xl border-2 text-base font-bold transition-all w-full flex items-center justify-center",
+                                                                                formData.arrangements[a.id] === opt
+                                                                                    ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
+                                                                                    : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
+                                                                            )}
+                                                                        >
+                                                                            {opt}
+                                                                        </button>
+                                                                    ))}
+                                                                </div>
+
+                                                                {formData.arrangements[a.id] === 'その他' && (
+                                                                    <motion.div
+                                                                        initial={{ opacity: 0, y: -10 }}
+                                                                        animate={{ opacity: 1, y: 0 }}
+                                                                        className="pb-4"
+                                                                    >
+                                                                        <label className="block text-[10px] font-black mb-2 text-obabaz-warm-400 uppercase tracking-widest pl-2">具体的な内容を教えてください</label>
+                                                                        <input
+                                                                            ref={otherInputRef}
+                                                                            type="text"
+                                                                            placeholder="例：フライドオニオン、柚子胡椒など"
+                                                                            className="w-full p-4 rounded-xl border-2 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-base bg-white shadow-sm relative z-10"
+                                                                            value={formData.arrangementsOther[a.id] || ''}
+                                                                            onChange={(e) => setFormData(prev => ({
+                                                                                ...prev,
+                                                                                arrangementsOther: {
+                                                                                    ...prev.arrangementsOther,
+                                                                                    [a.id]: e.target.value
+                                                                                }
+                                                                            }))}
+                                                                        />
+                                                                    </motion.div>
+                                                                )}
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        );
+                                    })}
+
+                                    {/* 150px footer spacer to ensure bottom items are not hidden by fixed action buttons */}
+                                    <div className="h-[150px] w-full" />
+                                </div>
                             )}
 
                             {step === 5 && recipe && (
