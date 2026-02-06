@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, RotateCcw, Utensils, Heart, Sparkles, Menu, X } from 'lucide-react';
 import { STEPS, INGREDIENT_CATEGORIES, COOKING_METHODS, SEASONINGS, ARRANGEMENTS, OBABAZ_TIPS } from './constants/steps';
@@ -31,6 +31,13 @@ export default function App() {
     const [activeArrangementCategory, setActiveArrangementCategory] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showModal, setShowModal] = useState(null); // 'about' | 'terms' | 'privacy' | null
+    const otherInputRef = useRef(null);
+
+    useEffect(() => {
+        if (otherInputRef.current) {
+            otherInputRef.current.focus();
+        }
+    }, [formData.salt, activeArrangementCategory, formData.arrangements]);
 
     const nextStep = () => setStep((s) => Math.min(s + 1, STEPS.length - 1));
     const prevStep = () => setStep((s) => Math.max(s - 1, 0));
@@ -514,10 +521,10 @@ export default function App() {
                                             >
                                                 <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的な味付けを入力してください</label>
                                                 <input
-                                                    autoFocus
+                                                    ref={otherInputRef}
                                                     type="text"
                                                     placeholder="例：ケチャップ、バルサミコ酢など"
-                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl relative z-30"
                                                     value={formData.saltOther}
                                                     onChange={(e) => setFormData(prev => ({ ...prev, saltOther: e.target.value }))}
                                                 />
@@ -581,10 +588,10 @@ export default function App() {
                                     <AnimatePresence>
                                         {activeArrangementCategory && (
                                             <motion.div
-                                                initial={{ opacity: 0, scale: 0.95 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                exit={{ opacity: 0, scale: 0.95 }}
-                                                className="absolute inset-0 bg-white/98 z-20 rounded-[2rem] p-6 flex flex-col shadow-xl border border-obabaz-warm-100"
+                                                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                                                className="absolute inset-0 bg-white/98 z-50 rounded-[2rem] p-6 pb-24 flex flex-col shadow-xl border border-obabaz-warm-100"
                                             >
                                                 <div className="flex justify-between items-center mb-6 bg-obabaz-earth-50/50 p-2 pl-4 rounded-full border border-obabaz-warm-100">
                                                     <h3 className="font-bold text-lg text-obabaz-earth-800 flex items-center gap-2">
@@ -625,10 +632,10 @@ export default function App() {
                                                         >
                                                             <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なアレンジを入力してください</label>
                                                             <input
-                                                                autoFocus
+                                                                ref={otherInputRef}
                                                                 type="text"
                                                                 placeholder="例：フライドオニオン、柚子胡椒など"
-                                                                className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
+                                                                className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl relative z-30"
                                                                 value={formData.arrangementsOther[activeArrangementCategory] || ''}
                                                                 onChange={(e) => setFormData(prev => ({
                                                                     ...prev,

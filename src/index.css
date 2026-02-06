@@ -11,6 +11,24 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force text color and reset mobile defaults */
+button,
+input,
+textarea,
+select {
+  color: #3b3831 !important;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure placeholder text doesn't look like value on mobile */
+::placeholder {
+  color: #a0aec0 !important;
+  opacity: 1;
 }
 
 /* Custom styles for obabaz app */
@@ -70,9 +88,11 @@ body {
   color: white;
   transform: scale(1.1);
 }
+
 .custom-scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .custom-scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
