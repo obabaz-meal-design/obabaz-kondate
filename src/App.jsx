@@ -534,124 +534,113 @@ export default function App() {
                                 </div>
                             )}
 
-                            {step === 4 && (
-                                <div className="relative">
-                                    <div className="flex flex-wrap gap-4 p-4 justify-center">
-                                        {ARRANGEMENTS.map(a => {
-                                            const isSelected = !!formData.arrangements[a.id];
-                                            const displayValue = formData.arrangements[a.id] === 'その他'
-                                                ? (formData.arrangementsOther[a.id] || 'その他')
-                                                : formData.arrangements[a.id];
+                            <div className="space-y-4 px-2">
+                                {ARRANGEMENTS.map(a => {
+                                    const isSelected = !!formData.arrangements[a.id];
+                                    const isActive = activeArrangementCategory === a.id;
+                                    const displayValue = formData.arrangements[a.id] === 'その他'
+                                        ? (formData.arrangementsOther[a.id] || 'その他')
+                                        : formData.arrangements[a.id];
 
-                                            return (
-                                                <div key={a.id} className={cn("transition-all duration-300", isSelected ? "w-auto min-w-[140px]" : "w-[calc(33.33%-12px)] md:w-[calc(25%-12px)]")}>
-                                                    <button
-                                                        onClick={() => setActiveArrangementCategory(a.id)}
-                                                        className={cn(
-                                                            "w-full p-4 h-24 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden",
-                                                            isSelected
-                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-lg scale-105 flex flex-row items-center justify-between gap-4 px-5"
-                                                                : "bg-white border-obabaz-earth-50 hover:border-obabaz-warm-200 shadow-sm flex flex-col items-center justify-center gap-1"
-                                                        )}
-                                                    >
-                                                        <div className={cn("flex items-center gap-3 min-w-0", isSelected ? "flex-row" : "flex-col")}>
-                                                            <span className="text-xl flex-shrink-0">{a.icon}</span>
-                                                            <div className={cn("flex flex-col min-w-0", isSelected ? "text-left items-start" : "text-center items-center")}>
-                                                                <span className="font-bold text-[10px] md:text-sm whitespace-nowrap">{a.label}</span>
-                                                                {isSelected && (
-                                                                    <span className="text-[10px] opacity-90 font-medium truncate w-full">
-                                                                        {displayValue}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </div>
-
-                                                        {isSelected && (
-                                                            <div
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    removeArrangement(a.id);
-                                                                }}
-                                                                className="flex-shrink-0 hover:bg-white/20 p-1.5 rounded-full transition-colors -mr-2"
-                                                                aria-label="削除"
-                                                            >
-                                                                <span className="text-[10px] font-bold leading-none block">✕</span>
-                                                            </div>
-                                                        )}
-                                                    </button>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-
-                                    {/* Sub-choice Overlay */}
-                                    <AnimatePresence>
-                                        {activeArrangementCategory && (
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                className="absolute inset-0 bg-white/98 z-50 rounded-[2rem] p-6 pb-24 flex flex-col shadow-xl border border-obabaz-warm-100"
+                                    return (
+                                        <div key={a.id} className="overflow-hidden border-2 border-obabaz-warm-100 rounded-3xl bg-white shadow-sm transition-all duration-300">
+                                            <button
+                                                onClick={() => setActiveArrangementCategory(isActive ? null : a.id)}
+                                                className={cn(
+                                                    "w-full p-5 flex items-center justify-between transition-all",
+                                                    isActive ? "bg-obabaz-warm-50" : "bg-white"
+                                                )}
                                             >
-                                                <div className="flex justify-between items-center mb-6 bg-obabaz-earth-50/50 p-2 pl-4 rounded-full border border-obabaz-warm-100">
-                                                    <h3 className="font-bold text-lg text-obabaz-earth-800 flex items-center gap-2">
-                                                        <span className="text-xl">{ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.icon}</span>
-                                                        {ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.label}を選ぶ
-                                                    </h3>
-                                                    <button
-                                                        onClick={() => setActiveArrangementCategory(null)}
-                                                        className="text-obabaz-earth-400 hover:text-obabaz-earth-600 bg-white w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm hover:shadow-md active:scale-90"
-                                                        aria-label="閉じる"
-                                                    >
-                                                        ✕
-                                                    </button>
-                                                </div>
-                                                <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar min-h-0" style={{ maxHeight: '70vh' }}>
-                                                    <div className="flex flex-col gap-2 mb-4">
-                                                        {ARRANGEMENTS.find(a => a.id === activeArrangementCategory)?.options.map(opt => (
-                                                            <button
-                                                                key={opt}
-                                                                onClick={() => selectArrangementOption(activeArrangementCategory, opt)}
-                                                                style={{ minHeight: '48px', height: '48px', flexShrink: 0 }}
-                                                                className={cn(
-                                                                    "px-5 rounded-full border-2 text-lg font-bold transition-all w-full flex items-center justify-center",
-                                                                    formData.arrangements[activeArrangementCategory] === opt
-                                                                        ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
-                                                                        : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-300"
-                                                                )}
-                                                            >
-                                                                {opt}
-                                                            </button>
-                                                        ))}
+                                                <div className="flex items-center gap-4 min-w-0">
+                                                    <span className="text-2xl flex-shrink-0">{a.icon}</span>
+                                                    <div className="text-left min-w-0">
+                                                        <h4 className="font-bold text-obabaz-earth-800 text-base">{a.label}</h4>
+                                                        {isSelected && !isActive && (
+                                                            <p className="text-xs text-obabaz-warm-600 font-bold truncate">
+                                                                選択中: {displayValue}
+                                                            </p>
+                                                        )}
                                                     </div>
-                                                    {formData.arrangements[activeArrangementCategory] === 'その他' && (
-                                                        <motion.div
-                                                            initial={{ opacity: 0, height: 0 }}
-                                                            animate={{ opacity: 1, height: 'auto' }}
-                                                            className="mb-4 px-2"
-                                                        >
-                                                            <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的なアレンジを入力してください</label>
-                                                            <input
-                                                                ref={otherInputRef}
-                                                                type="text"
-                                                                placeholder="例：フライドオニオン、柚子胡椒など"
-                                                                className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl relative z-30"
-                                                                value={formData.arrangementsOther[activeArrangementCategory] || ''}
-                                                                onChange={(e) => setFormData(prev => ({
-                                                                    ...prev,
-                                                                    arrangementsOther: {
-                                                                        ...prev.arrangementsOther,
-                                                                        [activeArrangementCategory]: e.target.value
-                                                                    }
-                                                                }))}
-                                                            />
-                                                        </motion.div>
-                                                    )}
                                                 </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    {isSelected && (
+                                                        <div
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                removeArrangement(a.id);
+                                                            }}
+                                                            className="bg-obabaz-earth-100 text-obabaz-earth-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black hover:bg-obabaz-warm-200 transition-colors"
+                                                        >
+                                                            ✕
+                                                        </div>
+                                                    )}
+                                                    <div className={cn("transition-transform duration-300", isActive ? "rotate-180" : "")}>
+                                                        <ChevronLeft className="w-5 h-5 -rotate-90 text-obabaz-earth-300" />
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                            <AnimatePresence>
+                                                {isActive && (
+                                                    <motion.div
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                                    >
+                                                        <div className="p-4 pt-0 bg-obabaz-warm-50/30 border-t border-obabaz-warm-50">
+                                                            <div className="grid grid-cols-1 gap-2 py-4">
+                                                                {a.options.map(opt => (
+                                                                    <button
+                                                                        key={opt}
+                                                                        onClick={() => selectArrangementOption(a.id, opt)}
+                                                                        style={{ minHeight: '48px', height: '48px' }}
+                                                                        className={cn(
+                                                                            "px-6 rounded-2xl border-2 text-base font-bold transition-all w-full flex items-center justify-center",
+                                                                            formData.arrangements[a.id] === opt
+                                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md"
+                                                                                : "bg-white border-obabaz-warm-100 text-obabaz-earth-700 hover:border-obabaz-warm-200"
+                                                                        )}
+                                                                    >
+                                                                        {opt}
+                                                                    </button>
+                                                                ))}
+                                                            </div>
+
+                                                            {formData.arrangements[a.id] === 'その他' && (
+                                                                <motion.div
+                                                                    initial={{ opacity: 0, y: -10 }}
+                                                                    animate={{ opacity: 1, y: 0 }}
+                                                                    className="pb-4"
+                                                                >
+                                                                    <label className="block text-[10px] font-black mb-2 text-obabaz-warm-400 uppercase tracking-widest pl-2">具体的な内容を教えてください</label>
+                                                                    <input
+                                                                        ref={otherInputRef}
+                                                                        type="text"
+                                                                        placeholder="例：フライドオニオン、柚子胡椒など"
+                                                                        className="w-full p-4 rounded-xl border-2 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-base bg-white shadow-sm relative z-10"
+                                                                        value={formData.arrangementsOther[a.id] || ''}
+                                                                        onChange={(e) => setFormData(prev => ({
+                                                                            ...prev,
+                                                                            arrangementsOther: {
+                                                                                ...prev.arrangementsOther,
+                                                                                [a.id]: e.target.value
+                                                                            }
+                                                                        }))}
+                                                                    />
+                                                                </motion.div>
+                                                            )}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    );
+                                })}
+
+                                {/* 150px footer spacer to ensure bottom items are not hidden by fixed action buttons */}
+                                <div className="h-[150px] w-full" />
+                            </div>
                             )}
 
                             {step === 5 && recipe && (
