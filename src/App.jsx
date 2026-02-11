@@ -844,35 +844,77 @@ export default function App() {
                         >
                             <div className="p-12 md:p-24 overflow-y-auto max-h-[90vh] custom-scrollbar scroll-smooth">
                                 {showModal === 'about' && (
-                                    <div className="space-y-12 pt-12">
+                                    <div className="space-y-8 pt-12">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">このアプリについて</h2>
-                                        <p className="font-bold text-obabaz-earth-800 text-2xl text-center italic mb-12 bg-obabaz-warm-50 py-4 rounded-2xl">〜 旬を愛で、手間を慈しむ台所から 〜</p>
-                                        <div className="space-y-8 text-obabaz-earth-800 leading-relaxed text-xl font-medium">
-                                            <p>「今日の夕飯、どうしよう」 そんな何気ない、けれど毎日続く大切な悩みに、寄り添える道具を作りたい。そんな想いから「obabaz 献立帖」は生まれました。</p>
-                                            <p>効率だけを追い求めるのではなく、その時の気分や、季節の移ろい、そして「美味しくなーれ」という少しの魔法を大切に。 経験豊富な料理人が隣でアドバイスをくれるような、温かい時間をあなたの台所にお届けします。</p>
+                                        <div className="bg-obabaz-warm-50 py-6 px-8 rounded-3xl mb-12 shadow-inner">
+                                            <p className="font-bold text-obabaz-earth-800 text-xl md:text-2xl text-center italic leading-relaxed">〜 旬を愛で、手間を慈しむ台所から 〜</p>
+                                        </div>
+                                        <div className="text-obabaz-earth-800 leading-relaxed text-lg md:text-xl font-medium space-y-6">
+                                            <p>「今日の夕飯、どうしよう。」 そんな何気ない、けれど毎日続く大切な悩みに寄り添える道具を作りたい。</p>
+                                            <p>そんな想いから、obabaz Meal Design 体験アプリは生まれました。 効率だけを追い求めるのではなく、その日の気分や、季節の移ろい、 そして「美味しくなーれ」という小さな気持ちを大切に。</p>
+                                            <p>経験豊富な料理人が隣でそっとヒントをくれるような、 あたたかい時間を、あなたの台所にお届けします。</p>
+                                            <p className="pt-4 border-t border-obabaz-warm-200 mt-8 font-black text-obabaz-warm-600">このアプリは「正解」を提示するものではありません。 選ぶのは、いつもあなたです。</p>
                                         </div>
                                     </div>
                                 )}
                                 {showModal === 'terms' && (
                                     <div className="space-y-12 pt-12">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">利用規約</h2>
-                                        <p className="text-obabaz-earth-800 leading-relaxed font-bold text-lg mb-8">本アプリは、日々の献立作りをサポートするための道具です。ご利用の際は、以下の点をご確認ください。</p>
-                                        <div className="space-y-10 text-obabaz-earth-900">
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span> サービスの目的</h3>
-                                                <p className="text-lg leading-relaxed">本アプリは、ユーザーが入力した条件に基づき、AIを通じて献立のヒントやレシピ案を提案するものです。</p>
-                                            </div>
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span> 自己責任の原則</h3>
-                                                <p className="text-lg leading-relaxed">AIが生成する情報は、必ずしも正確性や安全性を保証するものではありません。調理の際は、食材の状態や加熱の加減、アレルギー情報などを、ご自身の経験と判断で必ず確認してください。</p>
-                                            </div>
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span> 免責事項</h3>
-                                                <p className="text-lg leading-relaxed">本アプリの利用により生じた損害（体調不良、事故、損害等）について、開発者は一切の責任を負いかねます。</p>
-                                            </div>
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span> 禁止事項</h3>
-                                                <p className="text-lg leading-relaxed">公序良俗に反する利用や、システムの解析・改ざん、商用目的での無断転載はお控えください。</p>
+                                        <div className="space-y-8 text-obabaz-earth-900">
+                                            <div className="bg-white/50 p-6 md:p-8 rounded-3xl border border-obabaz-warm-100 shadow-sm transition-all hover:bg-white/80">
+                                                <h3 className="font-black text-2xl mb-6 text-obabaz-earth-900 border-l-8 border-[#A8C3A1] pl-4">obabaz Meal Design 利用規約</h3>
+                                                <p className="text-lg leading-relaxed mb-6 font-bold text-obabaz-earth-800">本アプリは、日々の献立作りをサポートするための道具です。ご利用にあたり、以下の内容をご確認ください。</p>
+
+                                                <div className="space-y-8">
+                                                    <div>
+                                                        <h4 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span>
+                                                            サービスの目的
+                                                        </h4>
+                                                        <p className="text-lg leading-relaxed pl-9">
+                                                            本アプリは、ユーザーが入力した条件に基づき、AIを通じて献立のヒントやレシピ案を提案するものです。
+                                                            料理の決定や最終判断は、ユーザーご自身の判断に委ねられます。
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
+                                                            自己判断の原則
+                                                        </h4>
+                                                        <p className="text-lg leading-relaxed pl-9">
+                                                            AIが生成するレシピはあくまで「提案」です。調理の際は、食材の鮮度、十分な加熱、アレルギーの有無などを、必ずご自身の責任において確認してください。
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span>
+                                                            免責事項
+                                                        </h4>
+                                                        <p className="text-lg leading-relaxed pl-9 text-obabaz-earth-700">
+                                                            本アプリの利用に関連して生じた損害（体調不良、事故、その他の損害等）については、
+                                                            法令により認められる範囲内で、運営者は責任を負わないものとします。
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span>
+                                                            禁止事項
+                                                        </h4>
+                                                        <p className="text-lg leading-relaxed pl-9 mb-4">以下の行為を禁止します。</p>
+                                                        <ul className="list-disc list-inside space-y-2 pl-12 text-lg text-obabaz-earth-700">
+                                                            <li>公序良俗に反する利用</li>
+                                                            <li>システムの解析・改ざん</li>
+                                                            <li>商用目的での無断転載</li>
+                                                            <li>その他、運営に支障を与える行為</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100">
+                                                    本規約は、必要に応じて予告なく変更される場合があります。
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -880,18 +922,57 @@ export default function App() {
                                 {showModal === 'privacy' && (
                                     <div className="space-y-12 pt-12">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">プライバシーポリシー</h2>
-                                        <div className="space-y-10 text-obabaz-earth-900">
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span> 情報の収集</h3>
-                                                <p className="text-lg leading-relaxed">本アプリでは、サービスの改善や動作確認のために、匿名の利用状況データを収集することがありますが、個人を特定する情報は取得いたしません。</p>
-                                            </div>
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span> 入力内容の扱い</h3>
-                                                <p className="text-lg leading-relaxed">ユーザーが入力した食材やアレンジの情報は、レシピ生成のためにAI（Gemini API等）へ送信されますが、本アプリ側で特定の個人に関連付けて保存することはありません。</p>
-                                            </div>
-                                            <div className="bg-white/50 p-6 rounded-3xl border border-obabaz-warm-100 shadow-sm">
-                                                <h3 className="font-black text-2xl mb-4 text-obabaz-earth-900 flex items-center gap-3"><span className="bg-[#A8C3A1] text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span> 第三者提供</h3>
-                                                <p className="text-lg leading-relaxed">法令に基づく場合を除き、取得した情報を第三者に提供することはありません。</p>
+                                        <div className="space-y-8 text-obabaz-earth-900">
+                                            <div className="bg-white/50 p-6 md:p-8 rounded-3xl border border-obabaz-warm-100 shadow-sm">
+                                                <p className="font-bold text-lg mb-8 leading-relaxed text-obabaz-earth-800">本アプリでは、安心してご利用いただくために、以下の方針で情報を取り扱います。</p>
+
+                                                <div className="space-y-8">
+                                                    <div>
+                                                        <h3 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span>
+                                                            情報の収集
+                                                        </h3>
+                                                        <div className="text-lg leading-relaxed pl-9 space-y-2">
+                                                            <p>本アプリでは、サービス改善および動作確認のために、匿名の利用状況データを取得する場合があります。</p>
+                                                            <p>通常の利用において、個人を特定する情報を取得することはありません。</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <h3 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
+                                                            入力内容の取り扱い
+                                                        </h3>
+                                                        <div className="text-lg leading-relaxed pl-9 space-y-2">
+                                                            <p>ユーザーが入力した食材・調理法・アレンジ情報は、レシピ生成のために外部AIサービス（例：Google Gemini API 等）へ送信される場合があります。</p>
+                                                            <p>送信されたデータは、各提供元のプライバシーポリシーに基づいて処理されます。</p>
+                                                            <p className="font-bold text-obabaz-warm-600">本アプリ側で、入力内容を特定の個人に関連付けて保存することはありません。</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <h3 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span>
+                                                            第三者提供
+                                                        </h3>
+                                                        <p className="text-lg leading-relaxed pl-9">
+                                                            法令に基づく場合を除き、取得した情報を第三者へ提供することはありません。
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h3 className="font-black text-xl mb-3 text-obabaz-earth-900 flex items-center gap-2">
+                                                            <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span>
+                                                            安全管理
+                                                        </h3>
+                                                        <p className="text-lg leading-relaxed pl-9">
+                                                            取得した情報は、不正アクセス・漏えい・改ざんなどを防止するため、適切な管理を行います。
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100 italic text-center">
+                                                    必要に応じて、本ポリシーは改定されることがあります。
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
