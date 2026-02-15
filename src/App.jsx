@@ -791,40 +791,40 @@ export default function App() {
                             <div className="flex justify-end mb-8">
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
+                                    className="w-16 h-16 flex items-center justify-center transition-all active:opacity-70 active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
                                     aria-label="メニューを閉じる"
                                 >
-                                    <X className="w-8 h-8 text-obabaz-warm-600" />
+                                    <X className="w-10 h-10 text-obabaz-warm-600" />
                                 </button>
                             </div>
                             <nav className="space-y-8">
                                 <button
                                     onClick={() => { setShowModal('about'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
                                 >
                                     <Heart className="w-5 h-5" /> このアプリについて
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('terms'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
                                 >
                                     <Utensils className="w-5 h-5" /> 利用規約
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('privacy'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
                                 >
                                     <Sparkles className="w-5 h-5" /> プライバシーポリシー
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('legal'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
                                 >
                                     <Scale className="w-5 h-5" /> 特定商取引法に基づく表記
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('gratitude'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-colors flex items-center gap-3 text-lg"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
                                 >
                                     <Coins className="w-5 h-5" /> 感謝の循環について
                                 </button>
@@ -859,7 +859,7 @@ export default function App() {
                                     <div className="space-y-8 pt-12 text-[#333333]">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">このアプリについて</h2>
                                         <div className="bg-obabaz-warm-50 py-6 px-8 rounded-3xl mb-12 shadow-inner">
-                                            <p className="font-bold text-[#333333] text-xl md:text-2xl text-center italic leading-relaxed">〜 季節と、今日の気分に寄り添う台所から 〜</p>
+                                            <p className="font-bold text-[#333333] text-xl md:text-2xl text-center italic leading-relaxed">〜 季節と今日の気分に寄り添う台所から 〜</p>
                                         </div>
                                         <div className="leading-relaxed text-lg md:text-xl font-medium space-y-6">
                                             <p>「今日の夕飯、どうしよう。」<br />
@@ -1066,7 +1066,7 @@ export default function App() {
                                     <div className="space-y-12 pt-12 text-[#333333]">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">感謝の循環について</h2>
                                         <div className="space-y-8">
-                                            <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] border border-obabaz-warm-100 shadow-sm leading-relaxed">
+                                            <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] leading-relaxed">
                                                 <div className="space-y-6 text-lg md:text-xl">
                                                     <p>ここは、obabaz Meal Design の体験に感謝の気持ちが生まれたときのための場所です。</p>
                                                     <p>体験は、これからも無料でご利用いただけます。</p>
@@ -1104,7 +1104,7 @@ export default function App() {
 
                                                     <div className="pt-8 flex justify-center">
                                                         <button
-                                                            className="bg-[#F6E7A6] hover:bg-[#ebd98c] text-[#333333] px-12 py-5 rounded-2xl font-black text-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
+                                                            className="bg-[#F6E7A6] hover:bg-[#ebd98c] text-[#333333] px-14 py-6 rounded-2xl font-black text-xl shadow-lg transition-all hover:scale-105 active:opacity-70 active:scale-95 flex items-center gap-2"
                                                         >
                                                             詳細を確認する
                                                         </button>
@@ -1117,7 +1117,7 @@ export default function App() {
                                 <div className="mt-20 mb-10 flex justify-center">
                                     <button
                                         onClick={() => setShowModal(null)}
-                                        className="bg-[#A8C3A1] hover:bg-[#8da387] text-white px-16 py-5 rounded-full font-black text-xl shadow-2xl transition-all hover:scale-105 active:scale-95"
+                                        className="bg-[#A8C3A1] hover:bg-[#8da387] text-white px-16 py-5 rounded-full font-black text-xl shadow-2xl transition-all hover:scale-105 active:opacity-70 active:scale-95"
                                     >
                                         閉じる
                                     </button>
