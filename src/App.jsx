@@ -233,7 +233,7 @@ export default function App() {
 
                     <button
                         onClick={() => setIsMenuOpen(true)}
-                        className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
+                        className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 active:brightness-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
                         aria-label="メニューを開く"
                     >
                         <Menu className="w-8 h-8 text-obabaz-warm-600" />
@@ -791,7 +791,7 @@ export default function App() {
                             <div className="flex justify-end mb-8">
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="w-16 h-16 flex items-center justify-center transition-all active:opacity-70 active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
+                                    className="w-16 h-16 flex items-center justify-center transition-all active:brightness-90 active:scale-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
                                     aria-label="メニューを閉じる"
                                 >
                                     <X className="w-10 h-10 text-obabaz-warm-600" />
@@ -800,33 +800,33 @@ export default function App() {
                             <nav className="space-y-8">
                                 <button
                                     onClick={() => { setShowModal('about'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Heart className="w-5 h-5" /> このアプリについて
+                                    <Heart className="w-6 h-6" /> このアプリについて
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('terms'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Utensils className="w-5 h-5" /> 利用規約
+                                    <Utensils className="w-6 h-6" /> 利用規約
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('privacy'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Sparkles className="w-5 h-5" /> プライバシーポリシー
+                                    <Sparkles className="w-6 h-6" /> プライバシーポリシー
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('legal'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Scale className="w-5 h-5" /> 特定商取引法に基づく表記
+                                    <Scale className="w-6 h-6" /> 特定商取引法に基づく表記
                                 </button>
                                 <button
                                     onClick={() => { setShowModal('gratitude'); setIsMenuOpen(false); }}
-                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:opacity-70 active:scale-[0.98] flex items-center gap-3 text-lg py-4 px-2"
+                                    className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Coins className="w-5 h-5" /> 感謝の循環について
+                                    <Coins className="w-6 h-6" /> 感謝の循環について
                                 </button>
                             </nav>
                             <div className="mt-auto pt-8 pb-12 border-t border-obabaz-earth-200 text-xs text-obabaz-earth-400 font-medium">
@@ -1102,9 +1102,9 @@ export default function App() {
                                                     <p className="text-center pt-8">今は閉じても大丈夫です。<br />
                                                         必要なときに、思い出してください。</p>
 
-                                                    <div className="pt-8 flex justify-center">
+                                                    <div className="pt-8 pb-[150px] flex justify-center">
                                                         <button
-                                                            className="bg-[#F6E7A6] hover:bg-[#ebd98c] text-[#333333] px-14 py-6 rounded-2xl font-black text-xl shadow-lg transition-all hover:scale-105 active:opacity-70 active:scale-95 flex items-center gap-2"
+                                                            className="bg-[#F6E7A6] hover:bg-[#ebd98c] text-[#333333] w-[80%] h-[56px] rounded-2xl font-black text-xl shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
                                                         >
                                                             詳細を確認する
                                                         </button>
@@ -1117,7 +1117,7 @@ export default function App() {
                                 <div className="mt-20 mb-10 flex justify-center">
                                     <button
                                         onClick={() => setShowModal(null)}
-                                        className="bg-[#A8C3A1] hover:bg-[#8da387] text-white px-16 py-5 rounded-full font-black text-xl shadow-2xl transition-all hover:scale-105 active:opacity-70 active:scale-95"
+                                        className="bg-[#A8C3A1] hover:bg-[#8da387] text-white min-w-[120px] h-[48px] rounded-full font-black text-2xl shadow-2xl transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center"
                                     >
                                         閉じる
                                     </button>
