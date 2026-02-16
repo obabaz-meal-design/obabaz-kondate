@@ -228,7 +228,7 @@ export default function App() {
                             <Utensils className="w-6 h-6 md:w-8 md:h-8 text-obabaz-warm-600 flex-shrink-0" />
                             <h1 className="text-xl md:text-3xl font-bold text-obabaz-warm-600 truncate leading-none">obabaz 献立帖</h1>
                         </div>
-                        <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate ml-8 md:ml-10 mt-1">〜 旬を愛で、手間を慈しむ台所から 〜</p>
+                        <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate ml-8 md:ml-10 mt-1">〜 季節と今日の気分に寄り添う台所から 〜</p>
                     </motion.div>
 
                     <button
@@ -1086,12 +1086,12 @@ export default function App() {
                                                             <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>お金の流れ</strong></h3>
                                                             <p className="pl-4 mb-4">いただいた金額は、決済に必要な手数料を除いたうえで、次のように分けられます。</p>
                                                             <div className="grid grid-cols-2 gap-4 text-center">
-                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#A8C3A1]/20">
-                                                                    <p className="text-sm font-bold text-obabaz-earth-400">運営へ</p>
+                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#A8C3A1]/20 flex flex-col justify-center min-h-[100px]">
+                                                                    <p className="text-[10px] md:text-xs font-bold text-obabaz-earth-400 leading-tight mb-2">obabaz Meal Design<br />の運営</p>
                                                                     <p className="text-3xl font-black text-[#A8C3A1]">50%</p>
                                                                 </div>
-                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#C8B7FF]/20">
-                                                                    <p className="text-sm font-bold text-obabaz-earth-400">寄付へ</p>
+                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#C8B7FF]/20 flex flex-col justify-center min-h-[100px]">
+                                                                    <p className="text-[10px] md:text-xs font-bold text-obabaz-earth-400 leading-tight mb-2">外部の支援活動への<br />寄付へ</p>
                                                                     <p className="text-3xl font-black text-[#C8B7FF]">50%</p>
                                                                 </div>
                                                             </div>
