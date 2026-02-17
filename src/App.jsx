@@ -926,8 +926,7 @@ export default function App() {
                                                             <strong>免責事項</strong>
                                                         </h4>
                                                         <p className="text-lg leading-relaxed pl-9">
-                                                            本アプリの利用に関連して生じた損害（体調不良、事故、その他の損害等）については、
-                                                            法令により認められる範囲内で、運営者は責任を負わないものとします。
+                                                            本アプリはAIを活用した献立提案サービスであり、情報の正確性や効果を保証するものではありません。本アプリの利用に関連して生じた損害（体調不良、事故、その他の損害等）については、法令により認められる範囲内で、運営者は責任を負わないものとします。提供内容をご理解の上、ご自身の判断でご活用ください。
                                                         </p>
                                                     </div>
 
@@ -1049,13 +1048,9 @@ export default function App() {
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>商品の引渡時期</strong></h3>
                                                         <p className="text-lg">決済完了後、即時に提供いたします。</p>
                                                     </div>
-                                                    <div className="border-b border-obabaz-warm-100 pb-4">
+                                                    <div>
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>返品・キャンセルについて</strong></h3>
                                                         <p className="text-lg">デジタルコンテンツおよび応援入金の性質上、決済完了後の返金・キャンセルには対応しておりません。</p>
-                                                    </div>
-                                                    <div>
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>免責事項</strong></h3>
-                                                        <p className="text-lg">本アプリはAIを活用した献立提案サービスです。情報の正確性や効果を保証するものではありません。提供内容をご理解の上、ご自身の判断でご活用ください。</p>
                                                     </div>
                                                 </div>
                                             </div>
