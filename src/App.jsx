@@ -233,10 +233,11 @@ export default function App() {
 
                     <button
                         onClick={() => setIsMenuOpen(true)}
-                        className="w-12 h-12 flex items-center justify-center transition-all active:scale-90 active:brightness-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
+                        className="flex flex-col items-center justify-center transition-all active:scale-90 active:brightness-90 flex-shrink-0 bg-transparent border-0 shadow-none outline-none appearance-none p-0"
                         aria-label="メニューを開く"
                     >
                         <Menu className="w-8 h-8 text-obabaz-warm-600" />
+                        <span className="text-[10px] font-bold text-obabaz-warm-600 mt-0.5">メニュー</span>
                     </button>
                 </header>
 
@@ -758,15 +759,16 @@ export default function App() {
                     )}
                 </div>
 
-                <footer className="mt-12 text-center text-[#C8B7FF] text-xs pb-10 font-bold">
-                    <p className="mb-2">美味しくなーれ、の気持ちを込めて。</p>
-                    &copy; 2026 obabaz Meal Design.
-                    <button
-                        onClick={() => setShowModal('terms')}
-                        className="ml-3 text-[#A8C3A1] hover:underline"
-                    >
-                        利用規約
-                    </button>
+                <footer className="mt-12 text-center pb-10">
+                    <p className="text-[#C8B7FF] text-xs font-bold mb-4">美味しくなーれ、の気持ちを込めて。</p>
+                    <div className="space-y-1 text-[#666666] text-xs font-bold mb-6">
+                        <p>運営：obabaz（個人事業）</p>
+                        <p>本アプリは無料で利用できます。</p>
+                        <p>応援入金は任意です。</p>
+                    </div>
+                    <p className="text-[#C8B7FF] text-[10px] font-bold">
+                        &copy; 2026 obabaz Meal Design.
+                    </p>
                 </footer>
             </main >
 
@@ -947,6 +949,16 @@ export default function App() {
                                                 <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100">
                                                     本規約は、必要に応じて予告なく変更される場合があります。
                                                 </p>
+                                                <div className="mt-12 flex justify-center">
+                                                    <a
+                                                        href="https://obabaz.com/legal-terms/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
+                                                    >
+                                                        公式サイトで最新の詳細を確認する
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1005,6 +1017,16 @@ export default function App() {
                                                 <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100 italic text-center">
                                                     必要に応じて、本ポリシーは改定されることがあります。
                                                 </p>
+                                                <div className="mt-12 flex justify-center">
+                                                    <a
+                                                        href="https://obabaz.com/legal-privacy-policy/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
+                                                    >
+                                                        公式サイトで最新の詳細を確認する
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1053,6 +1075,16 @@ export default function App() {
                                                         <p className="text-lg">デジタルコンテンツおよび応援入金の性質上、決済完了後の返金・キャンセルには対応しておりません。</p>
                                                     </div>
                                                 </div>
+                                                <div className="mt-12 flex justify-center border-t border-obabaz-warm-100 pt-12">
+                                                    <a
+                                                        href="https://obabaz.com/legal-tokushoho/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
+                                                    >
+                                                        公式サイトで最新の詳細を確認する
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1098,11 +1130,14 @@ export default function App() {
                                                         必要なときに、思い出してください。</p>
 
                                                     <div className="pt-8 pb-[150px] flex justify-center">
-                                                        <button
-                                                            className="bg-[#F6E7A6] hover:bg-[#ebd98c] text-[#333333] w-[80%] h-[56px] rounded-2xl font-black text-xl shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
+                                                        <a
+                                                            href="https://obabaz.com/cycle-of-gratitude/"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-[80%] h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
                                                         >
-                                                            詳細を確認する
-                                                        </button>
+                                                            公式サイトで最新の詳細を確認する
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
