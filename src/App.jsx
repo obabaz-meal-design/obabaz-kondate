@@ -1051,7 +1051,7 @@ export default function App() {
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>連絡先</strong></h3>
-                                                        <p className="text-lg">メールアドレス：black.kiji611@gmail.com</p>
+                                                        <p className="text-lg">メールアドレス：info@obabaz.com</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>提供内容および対価</strong></h3>
