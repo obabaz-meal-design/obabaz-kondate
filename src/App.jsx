@@ -764,7 +764,16 @@ export default function App() {
                     <div className="space-y-1 text-[#666666] text-xs font-bold mb-6">
                         <p>運営：obabaz（個人事業）</p>
                         <p>本アプリは無料で利用できます。</p>
-                        <p>応援入金は任意です。</p>
+                        <p>
+                            <a
+                                href="https://obabaz.com/meal-design-support/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[#AFC8E8] underline decoration-[#AFC8E8]/30 hover:decoration-[#AFC8E8] transition-all"
+                            >
+                                開発・運営サポートについて
+                            </a>
+                        </p>
                     </div>
                     <p className="text-[#C8B7FF] text-[10px] font-bold">
                         &copy; 2026 obabaz Meal Design.
@@ -1090,9 +1099,7 @@ export default function App() {
                                                     <div>
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>返品・返金について</strong></h3>
                                                         <p className="text-lg">
-                                                            デジタル決済の性質上、決済完了後の返金は原則として承っておりません。<br />
-                                                            ただし、重複決済や決済エラー等が確認できた場合は、個別に確認の上対応いたします。<br />
-                                                            詳細は
+                                                            デジタル決済の性質上、決済完了後の返金は原則として承っておりません。ただし、重複決済や決済エラー等が発生した場合は、内容を確認の上、個別に対応いたします。決済に関するご不明点は、
                                                             <a
                                                                 href="https://obabaz.com/contact/"
                                                                 target="_blank"
