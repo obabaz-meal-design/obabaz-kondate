@@ -1115,7 +1115,18 @@ export default function App() {
                                                             必要なときに、思い出していただければ十分です。</p>
                                                     </div>
 
-                                                    <div className="pt-8 pb-[150px] flex justify-center">
+                                                    <div className="pt-8 pb-[150px] flex flex-col items-center">
+                                                        <p className="text-center text-sm mb-[15px] font-bold text-obabaz-earth-600">
+                                                            <a
+                                                                href="https://obabaz.com/legal-tokushoho/"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="text-[#AFC8E8] underline hover:opacity-80 transition-opacity"
+                                                            >
+                                                                特定商取引法に基づく表記
+                                                            </a>
+                                                            をご確認のうえお手続きください。
+                                                        </p>
                                                         <button
                                                             className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-[80%] h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
                                                         >
