@@ -765,14 +765,12 @@ export default function App() {
                         <p>運営：obabaz（個人事業）</p>
                         <p>本アプリは無料で利用できます。</p>
                         <p>
-                            <a
-                                href="https://obabaz.com/meal-design-support/"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={() => setShowModal('gratitude')}
                                 className="hover:text-[#AFC8E8] underline decoration-[#AFC8E8]/30 hover:decoration-[#AFC8E8] transition-all"
                             >
                                 開発・運営サポートについて
-                            </a>
+                            </button>
                         </p>
                     </div>
                     <p className="text-[#C8B7FF] text-[10px] font-bold">
@@ -1164,23 +1162,24 @@ export default function App() {
                                                             必要なときに、思い出していただければ十分です。</p>
                                                     </div>
 
-                                                    <div className="pt-8 flex flex-col items-start px-2">
-                                                        <p className="text-sm mb-[15px] font-bold text-obabaz-earth-600">
-                                                            <a
-                                                                href="https://obabaz.com/legal-tokushoho/"
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="text-[#AFC8E8] underline hover:opacity-80 transition-opacity"
-                                                            >
-                                                                特定商取引法に基づく表記
-                                                            </a>
-                                                            をご確認のうえお手続きください。
+                                                    <div className="pt-8 flex flex-col items-center">
+                                                        <p className="text-sm md:text-base mb-8 text-obabaz-warm-600 font-bold leading-relaxed text-center bg-obabaz-warm-50/50 p-6 rounded-2xl border border-obabaz-warm-100 w-full max-w-sm">
+                                                            ※現在、決済システムのメンテナンスのため、サポートの受付を一時停止しております。再開まで今しばらくお待ちください。
                                                         </p>
                                                         <button
-                                                            className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
+                                                            disabled
+                                                            className="bg-obabaz-earth-100 text-obabaz-earth-300 w-full max-w-sm h-[64px] rounded-3xl font-black text-xl shadow-none cursor-not-allowed flex items-center justify-center gap-2 border-2 border-obabaz-earth-200 transition-all"
                                                         >
-                                                            500円でサポートする
+                                                            ただいま準備中です
                                                         </button>
+                                                        <div className="mt-8">
+                                                            <button
+                                                                onClick={() => setShowModal('legal')}
+                                                                className="text-[#AFC8E8] underline font-bold text-sm hover:opacity-80 transition-opacity"
+                                                            >
+                                                                特定商取引法に基づく表記
+                                                            </button>
+                                                        </div>
                                                     </div>
 
                                                     <div className="mt-12 flex justify-start pt-12 border-t border-obabaz-warm-100">
