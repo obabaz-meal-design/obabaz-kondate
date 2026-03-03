@@ -895,9 +895,18 @@ export default function App() {
 
                                             <p>隣で答えを出すのではなく、そっと順番を整える存在でありたい。</p>
 
-                                            <p>このアプリは「正解」を提示するものではありません。選ぶのは、いつもあなたです。</p>
-
                                             <p>そして、その選択が、少しだけ穏やかな時間につながればと願っています。</p>
+
+                                            <div className="mt-8 pt-8 border-t border-obabaz-warm-100 flex justify-start">
+                                                <a
+                                                    href="https://obabaz.com/meal-design-app/"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#AFC8E8] underline font-bold text-lg min-h-[44px] flex items-center hover:opacity-80 transition-opacity"
+                                                >
+                                                    詳細を確認する
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
