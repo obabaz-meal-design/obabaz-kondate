@@ -951,6 +951,16 @@ export default function App() {
                                                 <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100">
                                                     本規約は、必要に応じて予告なく変更される場合があります。
                                                 </p>
+                                                <div className="mt-12 flex justify-center">
+                                                    <a
+                                                        href="https://obabaz.com/legal-terms/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
+                                                    >
+                                                        公式サイトで最新の詳細を確認する
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1079,8 +1089,31 @@ export default function App() {
                                                     </div>
                                                     <div>
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>返品・返金について</strong></h3>
-                                                        <p className="text-lg">デジタル決済の性質上、決済完了後の返金は原則として承っておりません。<br />ただし、重複決済や決済エラー等が確認できた場合は、個別に確認の上対応いたします。</p>
+                                                        <p className="text-lg">
+                                                            デジタル決済の性質上、決済完了後の返金は原則として承っておりません。<br />
+                                                            ただし、重複決済や決済エラー等が確認できた場合は、個別に確認の上対応いたします。<br />
+                                                            詳細は
+                                                            <a
+                                                                href="https://obabaz.com/contact/"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="text-[#AFC8E8] underline hover:opacity-80 transition-opacity ml-1"
+                                                            >
+                                                                お問い合わせフォーム
+                                                            </a>
+                                                            よりご連絡ください。
+                                                        </p>
                                                     </div>
+                                                </div>
+                                                <div className="mt-12 flex justify-center border-t border-obabaz-warm-100 pt-12">
+                                                    <a
+                                                        href="https://obabaz.com/legal-tokushoho/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
+                                                    >
+                                                        公式サイトで最新の詳細を確認する
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1090,33 +1123,33 @@ export default function App() {
                                     <div className="space-y-12 pt-12 text-[#333333]">
                                         <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">開発・運営サポートについて</h2>
                                         <div className="space-y-8">
-                                            <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] leading-relaxed">
+                                            <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] leading-relaxed text-left pl-8 pr-6">
                                                 <div className="space-y-6 text-lg md:text-xl">
                                                     <p>obabaz献立帖は、無料でご利用いただける体験型アプリです。<br />
                                                         本ページは、アプリの開発および運営を支えるための任意のサポートについてご案内するものです。</p>
 
                                                     <div className="bg-[#F6E7A6]/30 p-8 rounded-2xl border border-[#F6E7A6]/50 space-y-4">
-                                                        <p className="text-center font-bold">アプリの利用にあたり、お支払いは必要ありません。<br />
+                                                        <p className="font-bold">アプリの利用にあたり、お支払いは必要ありません。<br />
                                                             支払いの有無により、提供内容や機能が変更されることはありません。</p>
                                                     </div>
 
                                                     <div className="space-y-6 pt-6">
                                                         <div>
                                                             <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>サポートについて</strong></h3>
-                                                            <p className="pl-4">本サポートは、obabaz献立帖の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
-                                                            <p className="pl-4 mt-2"><strong>固定額：500円（税込）</strong></p>
-                                                            <p className="pl-4 text-sm text-obabaz-earth-500 mt-1">※決済はStripe社の決済システムを利用しています。</p>
+                                                            <p>本サポートは、obabaz献立帖の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
+                                                            <p className="mt-2"><strong>固定額：500円（税込）</strong></p>
+                                                            <p className="text-sm text-obabaz-earth-500 mt-1">※決済はStripe社の決済システムを利用しています。</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="pt-4 space-y-2">
-                                                        <p className="text-center">お支払いは任意です。<br />
+                                                        <p>お支払いは任意です。<br />
                                                             今は閉じていただいて構いません。<br />
                                                             必要なときに、思い出していただければ十分です。</p>
                                                     </div>
 
-                                                    <div className="pt-8 pb-[150px] flex flex-col items-center">
-                                                        <p className="text-center text-sm mb-[15px] font-bold text-obabaz-earth-600">
+                                                    <div className="pt-8 flex flex-col items-start px-2">
+                                                        <p className="text-sm mb-[15px] font-bold text-obabaz-earth-600">
                                                             <a
                                                                 href="https://obabaz.com/legal-tokushoho/"
                                                                 target="_blank"
@@ -1128,10 +1161,21 @@ export default function App() {
                                                             をご確認のうえお手続きください。
                                                         </p>
                                                         <button
-                                                            className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-[80%] h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
+                                                            className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
                                                         >
                                                             500円でサポートする
                                                         </button>
+                                                    </div>
+
+                                                    <div className="mt-12 flex justify-start pt-12 border-t border-obabaz-warm-100">
+                                                        <a
+                                                            href="https://obabaz.com/meal-design-support/"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="bg-transparent text-[#AFC8E8] underline font-bold text-lg min-h-[44px] flex items-center"
+                                                        >
+                                                            公式サイトで最新の詳細を確認する
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
