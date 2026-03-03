@@ -828,7 +828,7 @@ export default function App() {
                                     onClick={() => { setShowModal('gratitude'); setIsMenuOpen(false); }}
                                     className="w-full text-left font-bold text-[#333333] hover:text-obabaz-warm-600 transition-all active:brightness-90 active:scale-[0.98] flex items-center gap-4 text-lg py-4 px-4 min-h-[56px]"
                                 >
-                                    <Coins className="w-6 h-6" /> 感謝の循環について
+                                    <Coins className="w-6 h-6" /> 開発・運営サポートについて
                                 </button>
                             </nav>
                             <div className="mt-auto pt-8 pb-12 border-t border-obabaz-earth-200 text-xs text-obabaz-earth-400 font-medium">
@@ -898,7 +898,7 @@ export default function App() {
                                         <div className="space-y-8">
                                             <div className="bg-white/50 p-6 md:p-8 rounded-3xl border border-obabaz-warm-100 shadow-sm">
                                                 <h3 className="font-black text-2xl mb-6 border-l-8 border-[#A8C3A1] pl-4">obabaz Meal Design 利用規約</h3>
-                                                <p className="text-lg leading-relaxed mb-6 font-bold">本アプリは、日々の献立作りをサポートするための道具です。ご利用にあたり、以下の内容をご確認ください。</p>
+                                                <p className="text-lg leading-relaxed mb-6 font-bold">obabaz献立帖（以下本アプリ）は、日々の献立作りをサポートするための道具です。<br />ご利用にあたり、以下の内容をご確認ください。</p>
 
                                                 <div className="space-y-8">
                                                     <div>
@@ -907,8 +907,7 @@ export default function App() {
                                                             <strong>サービスの目的</strong>
                                                         </h4>
                                                         <p className="text-lg leading-relaxed pl-9">
-                                                            本アプリは、ユーザーが入力した条件に基づき、AIを通じて献立のヒントやレシピ案を提案するものです。
-                                                            料理の決定や最終判断は、ユーザーご自身の判断に委ねられます。
+                                                            本アプリは、ユーザーが入力した条件に基づき、AIを通じて献立のヒントやレシピ案を提案するものです。料理の決定や最終判断は、ユーザーご自身の判断に委ねられます。
                                                         </p>
                                                     </div>
 
@@ -918,7 +917,7 @@ export default function App() {
                                                             <strong>自己判断の原則</strong>
                                                         </h4>
                                                         <p className="text-lg leading-relaxed pl-9">
-                                                            AIが生成するレシピはあくまで「提案」です。調理の際は、<strong>食材の鮮度や保存状態、十分な加熱、アレルギーの有無、調理器具の安全な使用</strong>などを、<strong>必ずご自身の判断と責任において確認してください。</strong>
+                                                            AIが生成する情報は、必ずしも正確性・完全性・安全性を保証するものではありません。調理の際は、食材の鮮度や保存状態、十分な加熱、アレルギーの有無、調理器具の安全な使用などを、必ずご自身の判断と責任において確認してください。
                                                         </p>
                                                     </div>
 
@@ -927,9 +926,12 @@ export default function App() {
                                                             <span className="bg-[#A8C3A1] text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-black">3</span>
                                                             <strong>免責事項</strong>
                                                         </h4>
-                                                        <p className="text-lg leading-relaxed pl-9">
-                                                            本アプリはAIを活用した献立提案サービスであり、情報の正確性や効果を保証するものではありません。本アプリの利用に関連して生じた損害（体調不良、事故、その他の損害等）については、法令により認められる範囲内で、運営者は責任を負わないものとします。提供内容をご理解の上、ご自身の判断でご活用ください。
-                                                        </p>
+                                                        <div className="text-lg leading-relaxed pl-9 space-y-4">
+                                                            <p>本アプリは、献立作成の補助を目的としたデジタルコンテンツです。提供する情報は参考情報であり、正確性・完全性・有用性を保証するものではありません。</p>
+                                                            <p>提供される情報は医学的・栄養学的な専門家による助言に代わるものではありません。</p>
+                                                            <p>本サービスの利用により生じた損害については、法令により認められる範囲内で、運営者が適切に対応いたします。</p>
+                                                            <p>調理や食材管理、安全確認は、利用者ご自身の判断と責任において行ってください。提供内容をご理解の上、ご自身の判断でご活用ください。</p>
+                                                        </div>
                                                     </div>
 
                                                     <div>
@@ -949,16 +951,6 @@ export default function App() {
                                                 <p className="mt-12 text-sm text-obabaz-earth-400 font-medium pt-6 border-t border-obabaz-warm-100">
                                                     本規約は、必要に応じて予告なく変更される場合があります。
                                                 </p>
-                                                <div className="mt-12 flex justify-center">
-                                                    <a
-                                                        href="https://obabaz.com/legal-terms/"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
-                                                    >
-                                                        公式サイトで最新の詳細を確認する
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1039,51 +1031,56 @@ export default function App() {
                                                 <div className="space-y-8">
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>事業者名</strong></h3>
-                                                        <p className="text-xl font-bold">obabaz（オババゼット）</p>
+                                                        <p className="text-xl font-bold">obabaz（屋号）</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>代表者名</strong></h3>
                                                         <p className="text-xl font-bold">五十嵐 昭子</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>所在地・電話番号</strong></h3>
-                                                        <p className="text-lg">ご請求があった場合、遅滞なく開示いたします。<br /><span className="text-sm text-obabaz-earth-400">（お問い合わせは下記のメールアドレスへお願いいたします）</span></p>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>所在地</strong></h3>
+                                                        <p className="text-lg">〒399-9421<br />長野県北安曇郡小谷村中小谷丙4169</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>連絡先</strong></h3>
-                                                        <p className="text-lg">メールアドレス：info@obabaz.com</p>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>電話番号</strong></h3>
+                                                        <p className="text-lg">請求があった場合には遅滞なく開示いたします。</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>提供内容および対価</strong></h3>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>メールアドレス</strong></h3>
+                                                        <p className="text-lg">info@obabaz.com</p>
+                                                    </div>
+                                                    <div className="border-b border-obabaz-warm-100 pb-4">
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>提供内容</strong></h3>
                                                         <ul className="list-disc list-inside space-y-2 text-lg">
-                                                            <li>obabaz Meal Design 体験アプリの提供</li>
-                                                            <li>上記活動の維持・運営のための応援入金の受付<br />
-                                                                <span className="text-sm pl-6 block">（応援入金は任意であり、金額は50円〜100,000円の範囲で自由に設定いただけます）</span>
-                                                            </li>
+                                                            <li>obabaz Meal Design 体験アプリ【obabaz献立帖】の提供</li>
+                                                            <li>本アプリの開発および運営を支えるための任意のサポート決済の受付</li>
                                                         </ul>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>支払方法・時期</strong></h3>
-                                                        <p className="text-lg">クレジットカード決済等。支払時期は各カード会社の規定に基づきます。</p>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>販売価格</strong></h3>
+                                                        <p className="text-lg">500円（税込）<br />
+                                                            <span className="text-sm">※本アプリは無料でご利用いただけます。本決済は任意のサポートであり、支払いの有無により提供内容や機能が変更されることはありません。</span></p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>商品の引渡時期</strong></h3>
-                                                        <p className="text-lg">決済完了後、即時に提供いたします。</p>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>追加手数料</strong></h3>
+                                                        <p className="text-lg">通信料は利用者のご負担となります。</p>
+                                                    </div>
+                                                    <div className="border-b border-obabaz-warm-100 pb-4">
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>支払方法</strong></h3>
+                                                        <p className="text-lg">クレジットカード決済（Stripe）</p>
+                                                    </div>
+                                                    <div className="border-b border-obabaz-warm-100 pb-4">
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>支払時期</strong></h3>
+                                                        <p className="text-lg">決済時に確定します。</p>
+                                                    </div>
+                                                    <div className="border-b border-obabaz-warm-100 pb-4">
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>提供時期</strong></h3>
+                                                        <p className="text-lg">本アプリは常時無料で利用可能です。<br />決済は任意のサポートであり、決済完了後に新たな機能やコンテンツの追加提供はありません。</p>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>返品・キャンセルについて</strong></h3>
-                                                        <p className="text-lg">デジタルコンテンツおよび応援入金の性質上、決済完了後の返金・キャンセルには対応しておりません。</p>
+                                                        <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>返品・返金について</strong></h3>
+                                                        <p className="text-lg">デジタル決済の性質上、決済完了後の返金は原則として承っておりません。<br />ただし、重複決済や決済エラー等が確認できた場合は、個別に確認の上対応いたします。</p>
                                                     </div>
-                                                </div>
-                                                <div className="mt-12 flex justify-center border-t border-obabaz-warm-100 pt-12">
-                                                    <a
-                                                        href="https://obabaz.com/legal-tokushoho/"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
-                                                    >
-                                                        公式サイトで最新の詳細を確認する
-                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1091,53 +1088,39 @@ export default function App() {
                                 )}
                                 {showModal === 'gratitude' && (
                                     <div className="space-y-12 pt-12 text-[#333333]">
-                                        <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">感謝の循環について</h2>
+                                        <h2 className="text-4xl md:text-5xl font-black text-[#A8C3A1] mb-12 border-b-8 border-[#A8C3A1]/20 pb-8 tracking-tighter">開発・運営サポートについて</h2>
                                         <div className="space-y-8">
                                             <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] leading-relaxed">
                                                 <div className="space-y-6 text-lg md:text-xl">
-                                                    <p>ここは、obabaz Meal Design の体験に感謝の気持ちが生まれたときのための場所です。</p>
-                                                    <p>体験は、これからも無料でご利用いただけます。</p>
+                                                    <p>obabaz献立帖は、無料でご利用いただける体験型アプリです。<br />
+                                                        本ページは、アプリの開発および運営を支えるための任意のサポートについてご案内するものです。</p>
 
-                                                    <div className="bg-[#F6E7A6]/30 p-4 rounded-2xl border border-[#F6E7A6]/50">
-                                                        <p className="text-center font-bold">使い続けるために、何かを支払う必要はありません。<br />
-                                                            支払いは、あくまで任意です。</p>
+                                                    <div className="bg-[#F6E7A6]/30 p-8 rounded-2xl border border-[#F6E7A6]/50 space-y-4">
+                                                        <p className="text-center font-bold">アプリの利用にあたり、お支払いは必要ありません。<br />
+                                                            支払いの有無により、提供内容や機能が変更されることはありません。</p>
                                                     </div>
 
                                                     <div className="space-y-6 pt-6">
                                                         <div>
-                                                            <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>金額について</strong></h3>
-                                                            <p className="pl-4">金額は、ご自身のタイミングと気持ちに合わせて自由に決めていただけます。</p>
-                                                        </div>
-
-                                                        <div>
-                                                            <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>お金の流れ</strong></h3>
-                                                            <p className="pl-4 mb-4">いただいた金額は、決済に必要な手数料を除いたうえで、次のように分けられます。</p>
-                                                            <div className="grid grid-cols-2 gap-4 text-center">
-                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#A8C3A1]/20 flex flex-col justify-center min-h-[100px]">
-                                                                    <p className="text-[10px] md:text-xs font-bold text-obabaz-earth-400 leading-tight mb-2">obabaz Meal Design<br />の運営</p>
-                                                                    <p className="text-3xl font-black text-[#A8C3A1]">50%</p>
-                                                                </div>
-                                                                <div className="bg-white p-4 rounded-2xl border-2 border-[#C8B7FF]/20 flex flex-col justify-center min-h-[100px]">
-                                                                    <p className="text-[10px] md:text-xs font-bold text-obabaz-earth-400 leading-tight mb-2">外部の支援活動への<br />寄付へ</p>
-                                                                    <p className="text-3xl font-black text-[#C8B7FF]">50%</p>
-                                                                </div>
-                                                            </div>
-                                                            <p className="text-center text-sm mt-4 font-bold text-obabaz-earth-400 italic">この仕組みは固定です。</p>
+                                                            <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>サポートについて</strong></h3>
+                                                            <p className="pl-4">本サポートは、obabaz献立帖の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
+                                                            <p className="pl-4 mt-2"><strong>固定額：500円（税込）</strong></p>
+                                                            <p className="pl-4 text-sm text-obabaz-earth-500 mt-1">※決済はStripe社の決済システムを利用しています。</p>
                                                         </div>
                                                     </div>
 
-                                                    <p className="text-center pt-8">今は閉じても大丈夫です。<br />
-                                                        必要なときに、思い出してください。</p>
+                                                    <div className="pt-4 space-y-2">
+                                                        <p className="text-center">お支払いは任意です。<br />
+                                                            今は閉じていただいて構いません。<br />
+                                                            必要なときに、思い出していただければ十分です。</p>
+                                                    </div>
 
                                                     <div className="pt-8 pb-[150px] flex justify-center">
-                                                        <a
-                                                            href="https://obabaz.com/cycle-of-gratitude/"
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
+                                                        <button
                                                             className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-[80%] h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-105 active:brightness-90 active:scale-95 flex items-center justify-center gap-2"
                                                         >
-                                                            公式サイトで最新の詳細を確認する
-                                                        </a>
+                                                            500円でサポートする
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
