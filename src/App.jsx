@@ -1151,8 +1151,7 @@ export default function App() {
                                                         <div>
                                                             <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>サポートについて</strong></h3>
                                                             <p>本サポートは、obabaz献立帖の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
-                                                            <p className="mt-2"><strong>固定額：500円（税込）</strong></p>
-                                                            <p className="text-sm text-obabaz-earth-500 mt-1">※決済はStripe社の決済システムを利用しています。</p>
+                                                            <p className="mt-2 text-lg"><strong>固定額：500円（税込）</strong></p>
                                                         </div>
                                                     </div>
 
