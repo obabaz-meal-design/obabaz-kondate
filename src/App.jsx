@@ -1162,8 +1162,8 @@ export default function App() {
                                                     </div>
 
                                                     <div className="pt-8 flex flex-col items-center">
-                                                        <p className="text-sm md:text-base mb-8 text-obabaz-warm-600 font-bold leading-relaxed text-center bg-obabaz-warm-50/50 p-6 rounded-2xl border border-obabaz-warm-100 w-full max-w-sm">
-                                                            ※現在、決済システムのメンテナンスのため、サポートの受付を一時停止しております。再開まで今しばらくお待ちください。
+                                                        <p className="text-sm md:text-base mb-10 text-obabaz-warm-600 font-bold leading-relaxed text-center bg-obabaz-warm-50/50 p-6 rounded-2xl border border-obabaz-warm-100 w-full max-w-sm">
+                                                            ※現在、決済システム調整中のため、<br />開発・運営サポートの受付を一時停止しております。<br />再開まで今しばらくお待ちください。
                                                         </p>
                                                         <button
                                                             disabled
