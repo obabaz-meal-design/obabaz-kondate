@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, RotateCcw, Utensils, Heart, Sparkles, Menu, X, Scale, Coins } from 'lucide-react';
+import { ChevronRight, ChevronLeft, RotateCcw, Utensils, Heart, Sparkles, Menu, X, Scale, Coins, ExternalLink } from 'lucide-react';
 import { STEPS, INGREDIENT_CATEGORIES, COOKING_METHODS, SEASONINGS, ARRANGEMENTS, OBABAZ_TIPS } from './constants/steps';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -217,18 +217,38 @@ export default function App() {
     return (
         <div className="min-h-screen bg-[#F6E7A6] text-obabaz-earth-900 font-sans overflow-x-hidden">
             {/* Header and Step Indicator - Semi-Sticky Container */}
-            <div className="sticky top-0 z-[100] bg-[#F6E7A6]/80 backdrop-blur-md px-4 pt-4">
-                <header className="max-w-2xl mx-auto py-4 flex items-center justify-between relative">
+            <div className="sticky top-0 z-[100] bg-[#F6E7A6]/90 backdrop-blur-md px-4 pt-4 shadow-sm">
+                <header className="max-w-2xl mx-auto py-4 flex items-start justify-between relative gap-2">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="flex flex-col items-start overflow-hidden"
+                        className="flex flex-col items-start"
                     >
-                        <div className="flex items-center gap-2">
-                            <Utensils className="w-6 h-6 md:w-8 md:h-8 text-obabaz-warm-600 flex-shrink-0" />
-                            <h1 className="text-xl md:text-3xl font-bold text-obabaz-warm-600 truncate leading-none">obabaz 献立帖</h1>
+                        <div className="flex items-center gap-2.5">
+                            <Utensils className="w-7 h-7 md:w-9 md:h-9 text-obabaz-warm-600 flex-shrink-0 mt-0.5" />
+                            <div>
+                                <span className="block text-xs md:text-sm font-bold text-obabaz-earth-600 tracking-wider">obabaz Meal Design</span>
+                                <h1 className="text-2xl md:text-3xl font-extrabold text-obabaz-warm-600 leading-tight">こころみ処</h1>
+                            </div>
                         </div>
-                        <p className="text-obabaz-earth-500 italic text-[10px] md:text-sm truncate ml-8 md:ml-10 mt-1">〜 季節と今日の気分に寄り添う台所から 〜</p>
+                        <div className="ml-9 md:ml-11 mt-2.5 space-y-1.5 text-obabaz-earth-800 text-xs md:text-sm leading-relaxed">
+                            <p className="text-obabaz-earth-600 italic font-medium">〜 季節と今日の気分に寄り添う台所から 〜</p>
+                            <p className="font-medium">
+                                食材から順番に選んで、<br />
+                                今日の一皿を考えてみる場所。
+                            </p>
+                            <div className="pt-1">
+                                <a
+                                    href="https://obabaz.com/meal-design/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 text-xs md:text-sm text-[#3B6998] font-bold underline underline-offset-4 decoration-[#AFC8E8] decoration-2 hover:text-[#2C5282] transition-colors"
+                                >
+                                    obabaz Meal Designとは？
+                                    <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                            </div>
+                        </div>
                     </motion.div>
 
                     <button
@@ -839,7 +859,7 @@ export default function App() {
                                 </button>
                             </nav>
                             <div className="mt-auto pt-8 pb-12 border-t border-obabaz-earth-200 text-xs text-obabaz-earth-400 font-medium">
-                                obabaz 献立帖 v1.0
+                                こころみ処 v1.0
                             </div>
                         </motion.div>
                     </div>
@@ -914,7 +934,7 @@ export default function App() {
                                         <div className="space-y-8">
                                             <div className="bg-white/50 p-6 md:p-8 rounded-3xl border border-obabaz-warm-100 shadow-sm">
                                                 <h3 className="font-black text-2xl mb-6 border-l-8 border-[#A8C3A1] pl-4">obabaz Meal Design 利用規約</h3>
-                                                <p className="text-lg leading-relaxed mb-6 font-bold">obabaz献立帖（以下本アプリ）は、日々の献立作りをサポートするための道具です。<br />ご利用にあたり、以下の内容をご確認ください。</p>
+                                                <p className="text-lg leading-relaxed mb-6 font-bold">こころみ処（以下本アプリ）は、日々の献立作りをサポートするための道具です。<br />ご利用にあたり、以下の内容をご確認ください。</p>
 
                                                 <div className="space-y-8">
                                                     <div>
@@ -1042,7 +1062,7 @@ export default function App() {
                                                         rel="noopener noreferrer"
                                                         className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
                                                     >
-                                                        公式サイトで最新の詳細を確認する
+                                                        公式サイトで詳細を確認する
                                                     </a>
                                                 </div>
                                             </div>
@@ -1078,7 +1098,7 @@ export default function App() {
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>提供内容</strong></h3>
                                                         <ul className="list-disc list-inside space-y-2 text-lg">
-                                                            <li>obabaz Meal Design 体験アプリ【obabaz献立帖】の提供</li>
+                                                            <li>体験アプリ【こころみ処】の提供</li>
                                                             <li>本アプリの開発および運営を支えるための任意のサポート決済の受付</li>
                                                         </ul>
                                                     </div>
@@ -1093,7 +1113,7 @@ export default function App() {
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>支払方法</strong></h3>
-                                                        <p className="text-lg">クレジットカード決済（Stripe）</p>
+                                                        <p className="text-lg">クレジットカード決済</p>
                                                     </div>
                                                     <div className="border-b border-obabaz-warm-100 pb-4">
                                                         <h3 className="font-black text-lg mb-2 text-obabaz-warm-600"><strong>支払時期</strong></h3>
@@ -1139,7 +1159,7 @@ export default function App() {
                                         <div className="space-y-8">
                                             <div className="bg-white/50 p-6 md:p-10 rounded-[3rem] leading-relaxed text-left pl-8 pr-6">
                                                 <div className="space-y-6 text-lg md:text-xl">
-                                                    <p>obabaz献立帖は、無料でご利用いただける体験型アプリです。<br />
+                                                    <p>こころみ処は、無料でご利用いただける体験型アプリです。<br />
                                                         本ページは、アプリの開発および運営を支えるための任意のサポートについてご案内するものです。</p>
 
                                                     <div className="bg-[#F6E7A6]/30 p-8 rounded-2xl border border-[#F6E7A6]/50 space-y-4">
@@ -1150,7 +1170,7 @@ export default function App() {
                                                     <div className="space-y-6 pt-6">
                                                         <div>
                                                             <h3 className="font-black text-xl mb-3 flex items-center gap-2 text-obabaz-warm-600"><strong>サポートについて</strong></h3>
-                                                            <p>本サポートは、obabaz献立帖の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
+                                                            <p>本サポートは、こころみ処の開発・改善および運営（サーバー費用・ドメイン費用等）に充当されます。</p>
                                                             <p className="mt-2 text-lg"><strong>固定額：500円（税込）</strong></p>
                                                         </div>
                                                     </div>
