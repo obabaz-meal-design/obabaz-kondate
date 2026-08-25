@@ -147,14 +147,22 @@ export default function App() {
             '炒める': "フライパンで手早く、シャキシャキ感を残すように強火で一気に仕上げていきます。パチパチという音が「美味しい合図」ですよ。",
             '煮る': "お鍋でじっくり、味が染み渡るようにコトコトと見守ってください。優しい湯気が台所を包み込みます。",
             '焼く': "表面においしそうな「焼き色」がつくまで、じっと我慢して焼いてくださいね。香ばしい香りが漂ってきます。",
-            '生（和える）': "素材の鮮度を活かし、ボウルの中で調味料と優しく馴染ませましょう。しっとりとした輝きが食欲をそそります。",
+            '和える': "食材に必要な加熱や下処理を行ったうえで、ボウルの中で調味料とやさしく和えて仕上げましょう。しっとりとした輝きが食欲をそそります。",
             '茹でる': "たっぷりのお湯の中で、食材たちが弾むように踊るのを見守ってください。火が通る瞬間の色の変化が美しいですよ。",
             '蒸す': "蓋の下で食材の甘みが最大限に引き出されるのを待ちましょう。開けた瞬間の真っ白な湯気が、最高のご馳走です。",
             '揚げる': "油の中で軽やかな音が響き、表面がカリッと黄金色に輝く瞬間を逃さないでくださいね。"
         };
 
         if (formData.stapleTemp === '冷製') {
-            cooking = `食材を${method}た後は、氷水でキュッと締めて、涼やかな一皿に仕立てましょう。瑞々しい輝きが、食卓に涼を呼び込みますよ。`;
+            if (method === '茹でる') {
+                cooking = `食材を茹でた後は、必要に応じて冷水等で手早く冷まし、涼やかな一皿に仕立てましょう。`;
+            } else if (['蒸す', '焼く', '炒める', '揚げる'].includes(method)) {
+                cooking = `${sensory[method] || `${method}を丁寧に進めた後は`}しっかり粗熱を取り、必要に応じて冷やして涼やかな味わいに仕上げましょう。`;
+            } else if (method === '和える') {
+                cooking = `食材に必要な加熱や下処理を行い、必要に応じて冷ました後、調味料とやさしく和えて涼やかな一皿に仕立てましょう。`;
+            } else {
+                cooking = `${method}を丁寧に進めた後は、必要に応じて冷まして涼やかな一皿に仕立てましょう。`;
+            }
         } else {
             cooking = sensory[method] || `${method}を丁寧に進めていきましょう。`;
         }
@@ -164,7 +172,7 @@ export default function App() {
         const stapleText = stapleName && stapleName !== '無し（おかずのみ）' ? `これを${stapleName}に合わせれば、ボリューム満点の一品になりますよ。` : "";
 
         if (formData.stapleTemp === '冷製') {
-            flavor = `${umami}の冷たいお出汁に、${salt}をキリッと効かせて。${stapleText}素材の芯まで冷えゆく心地よさを大切にしましょう。`;
+            flavor = `${umami}をベースに、${salt}で味を整えます。${stapleText}必要に応じて冷やし、素材に合った涼やかな仕立てを楽しみましょう。`;
         } else {
             flavor = `${umami}の深いコクに、${salt}で味の輪郭を整えます。${stapleText}味が食材の奥まで染み込んでいく様子を想像してくださいね。`;
         }
@@ -204,6 +212,11 @@ export default function App() {
 - 味のベース：${umami}
 - 仕上げの味：${salt}
 - アレンジ：${arrEntries.map(([id, opt]) => opt === 'その他' ? (formData.arrangementsOther[id] || 'お好み') : opt).join('、')}
+
+【食品安全について】
+- 食材に応じて必要な加熱や下処理を行ってください。
+- 「和える」を選択している場合も、生食を前提とせず、必要な加熱・下処理を行った後に和える方法として提案してください。
+- 食材の安全性を断定せず、最終的な調理判断は利用者が行える表現にしてください。
 
 【要望】
 - ステップごとの丁寧な解説を含めてください。
@@ -334,6 +347,7 @@ export default function App() {
                                                 <input
                                                     autoFocus
                                                     type="text"
+                                                    maxLength={100}
                                                     placeholder="例：鶏もも肉、鮭の切り身など"
                                                     className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                     value={formData.mainOther}
@@ -370,6 +384,7 @@ export default function App() {
                                                 <input
                                                     autoFocus
                                                     type="text"
+                                                    maxLength={100}
                                                     placeholder="例：キャベツ、ほうれん草など"
                                                     className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                     value={formData.vegetablesOther}
@@ -430,6 +445,7 @@ export default function App() {
                                             <input
                                                 autoFocus
                                                 type="text"
+                                                maxLength={100}
                                                 placeholder="例：ナン、そばなど"
                                                 className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                 value={formData.stapleOther}
@@ -467,6 +483,7 @@ export default function App() {
                                                 <input
                                                     autoFocus
                                                     type="text"
+                                                    maxLength={100}
                                                     placeholder="例：低温調理、圧力鍋など"
                                                     className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                     value={formData.methodOther}
@@ -508,6 +525,7 @@ export default function App() {
                                                 <input
                                                     autoFocus
                                                     type="text"
+                                                    maxLength={100}
                                                     placeholder="例：コンソメ、オイスターソースなど"
                                                     className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl"
                                                     value={formData.umamiOther}
@@ -544,6 +562,7 @@ export default function App() {
                                                 <input
                                                     ref={otherInputRef}
                                                     type="text"
+                                                    maxLength={100}
                                                     placeholder="例：ケチャップ、バルサミコ酢など"
                                                     className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl relative z-30"
                                                     value={formData.saltOther}
@@ -639,6 +658,7 @@ export default function App() {
                                                                         <input
                                                                             ref={otherInputRef}
                                                                             type="text"
+                                                                            maxLength={100}
                                                                             placeholder="例：フライドオニオン、柚子胡椒など"
                                                                             className="w-full p-4 rounded-xl border-2 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-base bg-white shadow-sm relative z-10"
                                                                             value={formData.arrangementsOther[a.id] || ''}

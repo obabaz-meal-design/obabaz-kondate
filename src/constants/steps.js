@@ -39,7 +39,7 @@ export const INGREDIENT_CATEGORIES = {
 };
 
 export const COOKING_METHODS = [
-    '炒める', '煮る', '焼く', '生（和える）', '茹でる', '蒸す', '揚げる', 'その他'
+    '炒める', '煮る', '焼く', '和える', '茹でる', '蒸す', '揚げる', 'その他'
 ];
 
 export const SEASONINGS = {
