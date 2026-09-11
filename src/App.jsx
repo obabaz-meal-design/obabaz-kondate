@@ -18,13 +18,15 @@ export default function App() {
         vegetablesOther: '',
         staple: '',
         stapleOther: '',
-        stapleTemp: '温製',
+        stapleTemp: '',
         method: '',
         methodOther: '',
         umami: '',
         umamiOther: '',
         salt: '',
         saltOther: '',
+        extraSeasonings: [],
+        extraSeasoningsOther: '',
         arrangements: {}, // Changed to object: { categoryId: option }
         arrangementsOther: {}, // { categoryId: text }
     });
@@ -50,17 +52,28 @@ export default function App() {
             vegetablesOther: '',
             staple: '',
             stapleOther: '',
-            stapleTemp: '温製',
+            stapleTemp: '',
             method: '',
             methodOther: '',
             umami: '',
             umamiOther: '',
             salt: '',
             saltOther: '',
+            extraSeasonings: [],
+            extraSeasoningsOther: '',
             arrangements: {},
             arrangementsOther: {},
         });
         setActiveArrangementCategory(null);
+    };
+
+    const toggleExtraSeasoning = (item) => {
+        setFormData(prev => ({
+            ...prev,
+            extraSeasonings: prev.extraSeasonings.includes(item)
+                ? prev.extraSeasonings.filter(i => i !== item)
+                : [...prev.extraSeasonings, item]
+        }));
     };
 
     const toggleVegetable = (v) => {
@@ -109,109 +122,98 @@ export default function App() {
         const method = getDisplayName('method', 'methodOther');
         const umami = getDisplayName('umami', 'umamiOther');
         const salt = getDisplayName('salt', 'saltOther');
+        const extraNames = (formData.extraSeasonings || [])
+            .map(s => {
+                if (s === 'その他') {
+                    return formData.extraSeasonings.includes('その他') && formData.extraSeasoningsOther.trim()
+                        ? formData.extraSeasoningsOther.trim()
+                        : null;
+                }
+                return s;
+            })
+            .filter(Boolean);
         const { arrangements } = formData;
 
-        // Appetizing Title Generation - Fixed Logic
+        // 調理法の名詞化マッピング
+        const methodNounMap = {
+            '炒める': '炒め',
+            '煮る': '煮',
+            '焼く': '焼き',
+            '和える': '和え',
+            '茹でる': '茹で',
+            '蒸す': '蒸し',
+            '揚げる': '揚げ'
+        };
+        const methodNoun = methodNounMap[method] || method;
+
+        // 味付けの表現
+        const saltPart = salt && salt !== 'その他' ? salt : (formData.saltOther || '');
+        const umamiPart = umami && umami !== 'その他' ? umami : (formData.umamiOther || '');
+        const seasoningName = saltPart ? `${saltPart}` : (umamiPart ? `${umamiPart}` : '');
+
+        // 短く自然な料理名
         let title = "";
-        const vegPart = vegNames.length > 0 ? vegNames.join('と') : "";
-        const mainPart = mainName ? mainName : "";
+        const mainShort = mainName ? mainName : "";
+        const vegShort = vegNames.length > 0 ? vegNames[0] : "";
 
+        if (mainShort && vegShort) {
+            title = `${mainShort}と${vegShort}の${seasoningName}${methodNoun}`;
+        } else if (mainShort) {
+            title = `${mainShort}の${seasoningName}${methodNoun}`;
+        } else if (vegShort) {
+            title = `${vegNames.slice(0, 2).join('と')}の${seasoningName}${methodNoun}`;
+        } else {
+            title = `お好み食材の${seasoningName}${methodNoun}`;
+        }
+
+        // 主食の補足表示 (「無し（おかずのみ）」以外の場合)
+        let stapleSubText = null;
         if (stapleName && stapleName !== '無し（おかずのみ）') {
-            const base = vegPart && mainPart ? `${mainPart}と${vegPart}` : (mainPart || vegPart);
-            title = `${base}で仕立てる、絶品${stapleName}`;
-        } else {
-            const base = vegPart && mainPart ? `${vegPart}と${mainPart}` : (vegPart || mainPart);
-            title = `素材の旨味を閉じ込めた、${base}の${method}`;
+            stapleSubText = `${stapleName}と合わせる一皿`;
         }
 
-        const tips = OBABAZ_TIPS[Math.floor(Math.random() * OBABAZ_TIPS.length)];
+        // アレンジの文字列表現
+        const arrEntries = Object.entries(arrangements);
+        const arrDescriptions = arrEntries.map(([id, opt]) => {
+            const cat = ARRANGEMENTS.find(c => c.id === id);
+            const disp = opt === 'その他' ? (formData.arrangementsOther[id] || 'お好み') : opt;
+            return `${cat ? cat.label : ''}の${disp}`;
+        });
 
-        // --- Step 1: Preparation ---
-        let prep = "";
-        const prepVeggies = vegNames.length > 0 ? `${vegNames.join('、')}は食感を活かすように丁寧に切り分けましょう。` : "";
-        if (mainName.includes('肉')) {
-            prep = `${mainName}は室温に戻してから、表面の水分を拭き取ると旨味が逃げませんよ。${prepVeggies}`;
-        } else if (mainName.includes('魚') || mainName.includes('シーフード')) {
-            prep = `${mainName}は下処理を丁寧に行い、臭みがないよう準備しましょうね。${prepVeggies}`;
-        } else if (mainName.includes('卵')) {
-            prep = `卵はボウルに割り、白身を切るようにリズムよく割りほぐすのが、ふんわり仕上げるコツです。${prepVeggies}`;
-        } else if (mainName.includes('豆腐')) {
-            prep = `豆腐は水気をしっかり切って、崩れないよう愛しむように切り分けましょう。${prepVeggies}`;
-        } else {
-            prep = `${mainName}と${vegNames.join('と')}を準備しましょう。食材の顔ぶれを見るだけで、ワクワクしますね。`;
-        }
+        // 1〜2文程度の短い一皿説明（操作を決めつけず「加えた」などの表現）
+        const ingText = [mainName, ...vegNames].filter(Boolean).join('、');
+        const seasoningsText = [umami, salt, ...extraNames].filter(Boolean).join('・');
+        const arrText = arrDescriptions.length > 0 ? `${arrDescriptions.join('・')}を加えた` : '';
+        const description = `${ingText}を${method}、${seasoningsText}の味付けで${formData.stapleTemp || '温製'}に仕立てました。${arrText ? `${arrText}一皿です。` : ''}`;
 
-        // --- Step 2: Cooking Action ---
-        let cooking = "";
-        const sensory = {
-            '炒める': "フライパンで手早く、シャキシャキ感を残すように強火で一気に仕上げていきます。パチパチという音が「美味しい合図」ですよ。",
-            '煮る': "お鍋でじっくり、味が染み渡るようにコトコトと見守ってください。優しい湯気が台所を包み込みます。",
-            '焼く': "表面においしそうな「焼き色」がつくまで、じっと我慢して焼いてくださいね。香ばしい香りが漂ってきます。",
-            '和える': "食材に必要な加熱や下処理を行ったうえで、ボウルの中で調味料とやさしく和えて仕上げましょう。しっとりとした輝きが食欲をそそります。",
-            '茹でる': "たっぷりのお湯の中で、食材たちが弾むように踊るのを見守ってください。火が通る瞬間の色の変化が美しいですよ。",
-            '蒸す': "蓋の下で食材の甘みが最大限に引き出されるのを待ちましょう。開けた瞬間の真っ白な湯気が、最高のご馳走です。",
-            '揚げる': "油の中で軽やかな音が響き、表面がカリッと黄金色に輝く瞬間を逃さないでくださいね。"
+        // 「あなたが選んだもの」サマリーデータ構造
+        const selectedSummary = {
+            ingredients: [mainName, ...vegNames].filter(Boolean).join('、') || '未選択',
+            staple: stapleName || '未選択',
+            method: method || '未選択',
+            seasoning: [umami, salt].filter(Boolean).join('・') || '未選択',
+            extraSeasoning: extraNames.length > 0 ? extraNames.join('・') : null,
+            arrangements: arrDescriptions.length > 0 ? arrDescriptions.join('、') : 'なし',
+            temp: formData.stapleTemp || '未選択'
         };
 
-        if (formData.stapleTemp === '冷製') {
-            if (method === '茹でる') {
-                cooking = `食材を茹でた後は、必要に応じて冷水等で手早く冷まし、涼やかな一皿に仕立てましょう。`;
-            } else if (['蒸す', '焼く', '炒める', '揚げる'].includes(method)) {
-                cooking = `${sensory[method] || `${method}を丁寧に進めた後は`}しっかり粗熱を取り、必要に応じて冷やして涼やかな味わいに仕上げましょう。`;
-            } else if (method === '和える') {
-                cooking = `食材に必要な加熱や下処理を行い、必要に応じて冷ました後、調味料とやさしく和えて涼やかな一皿に仕立てましょう。`;
-            } else {
-                cooking = `${method}を丁寧に進めた後は、必要に応じて冷まして涼やかな一皿に仕立てましょう。`;
-            }
-        } else {
-            cooking = sensory[method] || `${method}を丁寧に進めていきましょう。`;
-        }
-
-        // --- Step 3: Flavor & Staple Integration ---
-        let flavor = "";
-        const stapleText = stapleName && stapleName !== '無し（おかずのみ）' ? `これを${stapleName}に合わせれば、ボリューム満点の一品になりますよ。` : "";
-
-        if (formData.stapleTemp === '冷製') {
-            flavor = `${umami}をベースに、${salt}で味を整えます。${stapleText}必要に応じて冷やし、素材に合った涼やかな仕立てを楽しみましょう。`;
-        } else {
-            flavor = `${umami}の深いコクに、${salt}で味の輪郭を整えます。${stapleText}味が食材の奥まで染み込んでいく様子を想像してくださいね。`;
-        }
-
-        // --- Step 4: Final Touch & Arrangements ---
-        let finalTouch = "";
-        const arrEntries = Object.entries(arrangements);
-        if (arrEntries.length > 0) {
-            const arrDescriptions = arrEntries.map(([id, opt]) => {
-                const cat = ARRANGEMENTS.find(c => c.id === id);
-                const disp = opt === 'その他' ? (formData.arrangementsOther[id] || 'お好み') : opt;
-                return `${cat ? cat.label : ''}の${disp}`;
-            });
-            finalTouch = `仕上げに${arrDescriptions.join('や')}を添えます。香りが静かに広がり、彩りが加わることで、素材たちがより輝き始めます。`;
-        } else {
-            finalTouch = "最後は器との調和を考え、静かに整えます。出来立ての香りを大切に、そっと食卓へ運びましょう。";
-        }
-
-        // --- Step 5: Completion ---
-        let completion = `感謝を込めて盛り付けます。台所から食卓へ、温かな記憶を繋ぐ時間。さあ、冷めないうちに「いただきます」のご挨拶を。`;
-
-        return {
-            title,
-            description: `選び抜かれた食材と${method}の技がひとつになった一皿。心まで温まる、今日だけの特別な時間をどうぞ。`,
-            steps: [prep, cooking, flavor, finalTouch, completion],
-            tip: tips,
-            // Prompt for AI
-            prompt: `あなたは経験豊富な料理人です。提供された食材と条件をもとに、作る人の心に寄り添う、温かみのある丁寧な言葉遣いでレシピを執筆してください。
+        // AI用プロンプト（アシスタント役割、新【要望】、食品安全維持）
+        const prompt = `あなたは、料理について詳しく説明するアシスタントです。
+提供された食材と条件を尊重し、利用者が選んだ内容をもとに、詳しいレシピを作成してください。
+作る人が理解しやすい、丁寧な言葉遣いで記述してください。
 
 【材料】
 - メイン：${mainName}
 - 野菜：${vegNames.join('、')}
-- 主食：${stapleName}（${formData.stapleTemp}）
+- 合わせる主食：${stapleName}
+- 仕立て：${formData.stapleTemp || '未選択'}
 
 【調理方針】
 - 調理法：${method}
 - 味のベース：${umami}
 - 仕上げの味：${salt}
-- アレンジ：${arrEntries.map(([id, opt]) => opt === 'その他' ? (formData.arrangementsOther[id] || 'お好み') : opt).join('、')}
+- 広がる味付け：${extraNames.length > 0 ? extraNames.join('、') : 'なし'}
+- アレンジ：${arrDescriptions.length > 0 ? arrDescriptions.join('、') : 'なし'}
 
 【食品安全について】
 - 食材に応じて必要な加熱や下処理を行ってください。
@@ -219,9 +221,18 @@ export default function App() {
 - 食材の安全性を断定せず、最終的な調理判断は利用者が行える表現にしてください。
 
 【要望】
-- ステップごとの丁寧な解説を含めてください。
-- プロならではのコツや、美味しくなる一工夫を添えてください。
-- 読んだ人が温かい気持ちになれるような文章で記述してください。`
+- 材料の分量は目安として示し、何人分を想定したレシピか明記してください。
+- ステップごとの調理手順を分かりやすく示してください。
+- 利用者が選んだ食材・調理法・味付け・アレンジ・仕立てを尊重してください。
+- 選択されていない食材や調味料を必要以上に追加しないでください。
+- 必要に応じて、調理しやすくするための補足を添えてください。`;
+
+        return {
+            title,
+            stapleSubText,
+            description,
+            selectedSummary,
+            prompt
         };
     };
 
@@ -414,27 +425,7 @@ export default function App() {
                                             </button>
                                         ))}
                                     </div>
-                                    {formData.staple && (
-                                        <div className="pt-4 border-t border-obabaz-earth-100">
-                                            <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">仕立て（温度）</label>
-                                            <div className="grid grid-cols-2 gap-3">
-                                                {INGREDIENT_CATEGORIES.temp.map(t => (
-                                                    <button
-                                                        key={t}
-                                                        onClick={() => setFormData(prev => ({ ...prev, stapleTemp: t }))}
-                                                        className={cn(
-                                                            "px-6 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
-                                                            formData.stapleTemp === t
-                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
-                                                                : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
-                                                        )}
-                                                    >
-                                                        {t}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
+
                                     {formData.staple === 'その他' && (
                                         <motion.div
                                             initial={{ opacity: 0, height: 0 }}
@@ -571,6 +562,48 @@ export default function App() {
                                             </motion.div>
                                         )}
                                     </div>
+
+                                    {/* さらに広がる「味付け」 */}
+                                    <div>
+                                        <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">さらに広がる「味付け」<span className="text-xs font-normal text-obabaz-earth-500 ml-2">（複数選択可）</span></label>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                            {SEASONINGS.extra.map(item => {
+                                                const isSelected = formData.extraSeasonings.includes(item);
+                                                return (
+                                                    <button
+                                                        key={item}
+                                                        onClick={() => toggleExtraSeasoning(item)}
+                                                        className={cn(
+                                                            "px-3 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-base w-full flex items-center justify-center flex-shrink-0",
+                                                            isSelected
+                                                                ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md transform scale-[1.02]"
+                                                                : "bg-white border-obabaz-warm-50 text-obabaz-earth-700 hover:border-obabaz-warm-300"
+                                                        )}
+                                                    >
+                                                        {item}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                        {formData.extraSeasonings.includes('その他') && (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: 'auto' }}
+                                                className="my-10"
+                                            >
+                                                <label className="block text-xs font-bold mb-2 text-[#AFC8E8] uppercase tracking-wider">具体的な味付け（広がり）を入力してください</label>
+                                                <input
+                                                    autoFocus
+                                                    type="text"
+                                                    maxLength={100}
+                                                    placeholder="例：黒糖、米油など"
+                                                    className="w-full p-5 rounded-2xl border-4 border-[#AFC8E8] focus:border-obabaz-warm-400 outline-none transition-all text-lg bg-white shadow-xl relative z-30"
+                                                    value={formData.extraSeasoningsOther}
+                                                    onChange={(e) => setFormData(prev => ({ ...prev, extraSeasoningsOther: e.target.value }))}
+                                                />
+                                            </motion.div>
+                                        )}
+                                    </div>
                                 </div>
                             )}
 
@@ -680,74 +713,135 @@ export default function App() {
                                         );
                                     })}
 
+                                     {/* 仕立て（温度）[必須] */}
+                                     <div className="pt-6 border-t border-obabaz-earth-100 mt-6 px-1">
+                                         <label className="block text-sm font-bold mb-3 text-obabaz-earth-700">
+                                             仕立て（温度） <span className="text-xs text-red-500 font-bold ml-1">※必須</span>
+                                         </label>
+                                         <div className="grid grid-cols-2 gap-3">
+                                             {INGREDIENT_CATEGORIES.temp.map(t => (
+                                                 <button
+                                                     key={t}
+                                                     onClick={() => setFormData(prev => ({ ...prev, stapleTemp: t }))}
+                                                     className={cn(
+                                                         "px-6 rounded-full border-2 transition-all font-bold h-[48px] min-h-[48px] text-lg w-full flex items-center justify-center flex-shrink-0",
+                                                         formData.stapleTemp === t
+                                                             ? "bg-[#AFC8E8] border-[#AFC8E8] text-white shadow-md scale-[1.02]"
+                                                             : "bg-white border-obabaz-earth-50 text-obabaz-earth-700 hover:border-obabaz-warm-200"
+                                                     )}
+                                                 >
+                                                     {t}
+                                                 </button>
+                                             ))}
+                                         </div>
+                                     </div>
+
                                     {/* 150px footer spacer to ensure bottom items are not hidden by fixed action buttons */}
                                     <div className="h-[150px] w-full" />
                                 </div>
                             )}
 
                             {step === 5 && recipe && (
-                                <div className="space-y-6">
-                                    <div className="bg-white/95 border-[6px] border-[#A8C3A1] shadow-2xl relative overflow-hidden flex flex-col h-auto">
-                                        <div style={{ padding: '24px', paddingBottom: '120px' }}>
-                                            <h3 className="text-2xl md:text-3xl font-black text-obabaz-warm-800 mb-6 flex items-center gap-3">
+                                <div className="space-y-8">
+                                    {/* 選んだ内容から生まれた一皿カード */}
+                                    <div className="bg-white/95 border-[4px] border-[#AFC8E8] rounded-3xl shadow-xl p-6 md:p-8 relative">
+                                        <div className="mb-6">
+                                            <h3 className="text-2xl md:text-3xl font-black text-obabaz-earth-900 mb-2">
                                                 {recipe.title}
                                             </h3>
-                                            <p style={{ color: '#4A3B31', fontStyle: 'italic', marginBottom: '32px', paddingLeft: '12px', lineHeight: '1.6', fontSize: '1rem' }}>
+                                            {recipe.stapleSubText && (
+                                                <p className="text-sm font-bold text-obabaz-earth-600 mb-4">
+                                                    {recipe.stapleSubText}
+                                                </p>
+                                            )}
+                                            <p className="text-obabaz-earth-800 leading-relaxed font-medium text-base pt-3 border-t border-obabaz-earth-100">
                                                 {recipe.description}
                                             </p>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                                                {recipe.steps.map((s, i) => (
-                                                    <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-                                                        <div style={{ backgroundColor: '#AFC8E8', color: 'white', width: '28px', height: '28px', borderRadius: '9999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '900', flexShrink: 0, marginTop: '4px' }}>
-                                                            {i + 1}
-                                                        </div>
-                                                        <div style={{ color: '#2D241E', lineHeight: '1.6', fontWeight: '700', fontSize: '1.125rem', flexGrow: 1, paddingTop: '2px' }}>
-                                                            {s}
-                                                        </div>
+                                        </div>
+
+                                        {/* あなたが選んだもの（思考順の表示） */}
+                                        <div className="mt-8 pt-6 border-t border-dashed border-obabaz-earth-200">
+                                            <h4 className="text-sm font-bold text-obabaz-earth-700 mb-4 flex items-center gap-2">
+                                                <span>💡</span> あなたが選んだもの
+                                            </h4>
+
+                                            <div className="space-y-4 text-sm bg-obabaz-warm-50/50 p-5 rounded-2xl border border-obabaz-warm-100">
+                                                {/* 第1段階: 食材・合わせる主食 */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-xs font-black text-obabaz-earth-800">食材</div>
+                                                        <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.ingredients}</div>
                                                     </div>
-                                                ))}
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-xs font-black text-obabaz-earth-800">合わせる主食</div>
+                                                        <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.staple}</div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="text-left text-obabaz-earth-400 font-bold text-xs my-2.5 pl-0.5">↓</div>
+
+                                                {/* 第2段階: 調理法 */}
+                                                <div className="space-y-0.5">
+                                                    <div className="text-xs font-black text-obabaz-earth-800">調理法</div>
+                                                    <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.method}</div>
+                                                </div>
+
+                                                <div className="text-left text-obabaz-earth-400 font-bold text-xs my-2.5 pl-0.5">↓</div>
+
+                                                {/* 第3段階: 味付け・さらに広がる味付け */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-xs font-black text-obabaz-earth-800">味付け</div>
+                                                        <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.seasoning}</div>
+                                                    </div>
+                                                    {recipe.selectedSummary.extraSeasoning && (
+                                                        <div className="space-y-0.5">
+                                                            <div className="text-xs font-black text-obabaz-earth-800">さらに広がる味付け</div>
+                                                            <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.extraSeasoning}</div>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                <div className="text-left text-obabaz-earth-400 font-bold text-xs my-2.5 pl-0.5">↓</div>
+
+                                                {/* 第4段階: アレンジ・仕立て */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-xs font-black text-obabaz-earth-800">アレンジ</div>
+                                                        <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.arrangements}</div>
+                                                    </div>
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-xs font-black text-obabaz-earth-800">仕立て</div>
+                                                        <div className="text-base font-normal text-obabaz-earth-900 leading-normal">{recipe.selectedSummary.temp}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div style={{ position: 'absolute', bottom: '24px', left: '0', right: '0', display: 'flex', justifyContent: 'center', zIndex: 100 }}>
+                                        {/* もう一度考える */}
+                                        <div className="mt-8 pt-4 text-center">
                                             <button
                                                 onClick={reset}
-                                                className="bg-obabaz-earth-800 hover:bg-obabaz-earth-900 text-white px-8 py-4 rounded-full font-black shadow-2xl flex items-center gap-2 transition-all hover:scale-105 active:scale-95 whitespace-nowrap text-base"
+                                                className="bg-obabaz-earth-800 hover:bg-obabaz-earth-900 text-white px-8 py-3.5 rounded-full font-bold shadow-lg inline-flex items-center gap-2 transition-all hover:scale-105 active:scale-95 text-sm"
                                             >
-                                                <RotateCcw className="w-5 h-5" /> もう一度考える
+                                                <RotateCcw className="w-4 h-4" /> もう一度考える
                                             </button>
                                         </div>
-
                                     </div>
 
-                                    <motion.div
-                                        initial={{ scale: 0.9, opacity: 0 }}
-                                        animate={{ scale: 1, opacity: 1 }}
-                                        className="bg-obabaz-warm-100 p-6 rounded-2xl flex items-start gap-4 border border-obabaz-warm-200"
-                                    >
-                                        <div className="bg-white p-2 rounded-full shadow-sm">
-                                            <Heart className="w-6 h-6 text-obabaz-warm-500" />
+                                    {/* 生成AIへの導線 */}
+                                    <div className="pt-6 border-t-2 border-dashed border-obabaz-warm-300 pb-12">
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <Sparkles className="w-5 h-5 text-obabaz-warm-500" />
+                                            <h4 className="font-bold text-lg text-obabaz-earth-800">詳しい作り方を知りたいときは</h4>
                                         </div>
-                                        <div>
-                                            <p className="font-bold text-obabaz-warm-800 text-base mb-1">obabazからの台所の知恵</p>
-                                            <p className="text-obabaz-earth-700 leading-relaxed text-sm">{recipe.tip}</p>
-                                        </div>
-                                    </motion.div>
+                                        <p className="text-xs text-obabaz-earth-700 mb-4 leading-relaxed font-medium">
+                                            あなたが選んだ内容を、生成AIへ渡せるプロンプトにまとめました。コピーしてChatGPTやGeminiなどの生成AIに貼り付けると、詳しいレシピ作成に活用できます。
+                                        </p>
 
-                                    {/* AI Prompt Section */}
-                                    <div className="pt-12 border-t-2 border-dashed border-obabaz-warm-300 pb-16">
-                                        <div className="flex items-center gap-2 mb-6">
-                                            <Sparkles className="w-6 h-6 text-obabaz-warm-500" />
-                                            <h4 className="font-black text-xl text-obabaz-earth-800">生成AI（ChatGPT/Gemini等）で詳細レシピを作る</h4>
-                                        </div>
-                                        <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl mb-6 border border-obabaz-warm-100 shadow-sm">
-                                            <p className="text-obabaz-earth-700 leading-relaxed font-bold">
-                                                このプロンプトをコピーして生成AIに貼り付けると、より詳細なレシピが作成できます。
-                                            </p>
-                                        </div>
-                                        <div className="relative group rounded-2xl overflow-hidden shadow-2xl border-[4px] border-obabaz-earth-900 bg-obabaz-earth-900">
-                                            <div className="flex items-center justify-between px-6 py-3 bg-obabaz-earth-800 border-b border-obabaz-earth-700">
-                                                <span className="text-obabaz-earth-300 text-xs font-mono font-bold uppercase tracking-widest">Markdown Prompt</span>
+                                        <div className="relative group rounded-2xl overflow-hidden shadow-xl border-[3px] border-obabaz-earth-900 bg-obabaz-earth-900">
+                                            <div className="flex items-center justify-between px-5 py-2.5 bg-obabaz-earth-800 border-b border-obabaz-earth-700">
+                                                <span className="text-obabaz-earth-300 text-xs font-mono font-bold uppercase tracking-widest">AI Prompt</span>
                                                 <button
                                                     onClick={() => {
                                                         navigator.clipboard.writeText(recipe.prompt);
@@ -757,12 +851,12 @@ export default function App() {
                                                             setTimeout(() => btn.textContent = 'コピーする', 2000);
                                                         }
                                                     }}
-                                                    className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-xs font-black transition-all border border-white/20 active:scale-95"
+                                                    className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold transition-all border border-white/20 active:scale-95"
                                                 >
                                                     <span id="copy-indicator">コピーする</span>
                                                 </button>
                                             </div>
-                                            <pre className="p-8 text-obabaz-earth-50 text-sm overflow-x-auto font-mono leading-loose max-h-[500px] overflow-y-auto custom-scrollbar-dark text-left whitespace-pre-wrap">
+                                            <pre className="p-6 text-obabaz-earth-50 text-xs sm:text-sm overflow-x-auto font-mono leading-relaxed max-h-[400px] overflow-y-auto custom-scrollbar-dark text-left whitespace-pre-wrap">
                                                 {recipe.prompt}
                                             </pre>
                                         </div>
@@ -789,11 +883,12 @@ export default function App() {
                                     (step === 0 && (!formData.main || formData.vegetables.length === 0)) ||
                                     (step === 1 && !formData.staple) ||
                                     (step === 2 && !formData.method) ||
-                                    (step === 3 && (!formData.umami || !formData.salt))
+                                    (step === 3 && (!formData.umami || !formData.salt)) ||
+                                    (step === 4 && !formData.stapleTemp)
                                 }
                                 className="bg-obabaz-warm-600 hover:bg-obabaz-warm-700 disabled:bg-obabaz-earth-100 disabled:text-obabaz-earth-300 disabled:cursor-not-allowed text-white px-10 py-4 rounded-full font-bold shadow-xl shadow-obabaz-warm-200/50 flex items-center gap-3 transition-all hover:scale-105 active:scale-95"
                             >
-                                {step === 4 ? '献立を整える' : '次のステップへ'} <ChevronRight className="w-5 h-5" />
+                                {step === 4 ? '選んだ一皿を見る' : '次のステップへ'} <ChevronRight className="w-5 h-5" />
                             </button>
                         </div>
                     )}
@@ -917,7 +1012,7 @@ export default function App() {
                                             <p>そんな想いから、obabaz Meal Design 体験アプリは生まれました。<br />
                                                 旬の食材を楽しみたい気持ちも、冷蔵庫にあるもので済ませたい日も、どちらも、あなたの大切な台所の現実です。</p>
 
-                                            <p>効率だけを追い求めるのではなく、その日の気分や体調、買い物のあとに残った野菜や、少ししなびた葉物まで含めて。「美味しくなーれ」という小さな気持ちを、置き去りにしないために。</p>
+                                            <p>効率だけを追い求めるのではなく、その日の気分や体調、買い物のあとに残った野菜や、少ししなびた葉物まで含めて、「美味しくなーれ」という小さな気持ちを、置き去りにしないために。</p>
 
                                             <p>けれど実際は、献立を決めるだけで、思った以上に心は疲れています。<br />
                                                 何を使うか。どう調理するか。どんな味にするか。毎日の献立は、小さな判断の連続です。</p>
@@ -926,7 +1021,7 @@ export default function App() {
 
                                             <p className="font-black text-obabaz-warm-600 pt-4 border-t border-obabaz-warm-100">このアプリは、答えを提示するためのものではありません。</p>
 
-                                            <p>食材 → 調理法 → 味付け と、考える順番を整えることで、一度に抱えていた判断を、ひとつずつに分けていく。<br />
+                                            <p>食材 → 調理法 → 味付け → アレンジ と、考える順番を整えることで、一度に抱えていた判断を、ひとつずつに分けていく。<br />
                                                 そうして、思考の負担をそっと軽くする。</p>
 
                                             <p>考えなくていいのに、ちゃんと自分で決めたと思える。その体験をつくるための設計を、大切にしています。</p>
@@ -935,7 +1030,7 @@ export default function App() {
 
                                             <p>そして、その選択が、少しだけ穏やかな時間につながればと願っています。</p>
 
-                                            <div className="mt-8 pt-8 border-t border-obabaz-warm-100 flex justify-start">
+                                            <div className="mt-8 pt-8 border-t border-obabaz-warm-100 flex flex-col items-start gap-2">
                                                 <a
                                                     href="https://obabaz.com/meal-design-app/"
                                                     target="_blank"
@@ -943,6 +1038,14 @@ export default function App() {
                                                     className="text-[#AFC8E8] underline font-bold text-lg min-h-[44px] flex items-center hover:opacity-80 transition-opacity"
                                                 >
                                                     詳細を確認する
+                                                </a>
+                                                <a
+                                                    href="https://obabaz.com/meal-design-third-party-licenses/"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#AFC8E8] underline font-bold text-lg min-h-[44px] flex items-center hover:opacity-80 transition-opacity"
+                                                >
+                                                    OSSライセンス
                                                 </a>
                                             </div>
                                         </div>
@@ -1082,7 +1185,7 @@ export default function App() {
                                                         rel="noopener noreferrer"
                                                         className="bg-[#AFC8E8] hover:bg-[#9db8db] text-white w-full max-w-sm h-[56px] rounded-2xl font-black text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center text-center px-4"
                                                     >
-                                                        公式サイトで詳細を確認する
+                                                        公式サイトで最新の詳細を確認する
                                                     </a>
                                                 </div>
                                             </div>
